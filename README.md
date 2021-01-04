@@ -90,8 +90,8 @@ An example being the email suffix that is required while registering a new accou
 The default values can be configured in de `data.sql` file, which is located in the same directory as the `application.properties` file.
 
 ```sql
-INSERT INTO `app_config` (`key_name`, `value`) VALUES ('email_suffix', 'hva.nl');
-INSERT INTO `app_config` (`key_name`, `value`) VALUES ('organisation', 'Hogeschool van Amsterdam');
+INSERT INTO `app_config` (`key_name`, `value`) VALUES ('email_suffix', 'tmp.nl');
+INSERT INTO `app_config` (`key_name`, `value`) VALUES ('organisation', 'Github');
 INSERT INTO `app_config` (`key_name`, `value`) VALUES ('logo_path', 'assets/images/HvAlogo.png');
 ```
 The configuration can later be changed in the admin panel of the application in the frontend.
