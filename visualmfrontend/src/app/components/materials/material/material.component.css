@@ -1,0 +1,144 @@
+.badge-pill {
+  font-size: 0.9rem !important;
+}
+
+.btn {
+  color: #ffffff;
+  background-color: #00bcd4;
+  box-shadow: 0 0.5rem 20px rgba(0, 188, 212, 0.5);
+  cursor: pointer;
+  min-width: 0;
+}
+
+.btn:hover {
+  color: #ffffff;
+  background-color: #009db0;
+  box-shadow: 0 0.5rem 20px rgba(0, 157, 176, 0.5);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+}
+
+.saveBtn {
+  width: auto;
+}
+.form-control {
+  border-radius: 50px;
+  height: 45px;
+  width: auto;
+  border: 0px rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.2);
+}
+
+.sammie {
+  display: none;
+  width: 1050px;
+  height: 1485px;
+}
+
+.outerMaterialPDF {
+  width: 1050px;
+  height: 1485px;
+  background: white !important;
+}
+
+.flippedTitle {
+  -moz-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -ms-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+  /*border-bottom: 2px rgba(0,0,0, 0.2) dotted;*/
+  /*border-top: 2px rgba(0,0,0, 0.2) dotted;*/
+  margin-top: 220px;
+  margin-bottom: 90px;
+}
+.borderCenter {
+  height: 85px;
+  width: 300px;
+  /*border-bottom: 2px rgba(0,0,0, 0.2) dotted;*/
+  /*border-left: 2px rgba(0,0,0, 0.2) dotted;*/
+  /*border-right: 2px rgba(0,0,0, 0.2) dotted;*/
+  margin: auto auto 50px;
+}
+.borderTop {
+  /*border-top: 2px rgba(0,0,0, 0.2) dotted;*/
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.pdfText {
+  margin-left: 80px;
+  margin-right: 80px;
+}
+hr {
+  border-top: 2px solid rgba(0, 0, 0, 0.3);
+}
+.col-md-4 {
+  width: 100%;
+}
+.col-md-6 {
+  width: auto;
+}
+
+.name {
+  font-size: 25pt;
+}
+
+.type {
+  font-size: 15pt;
+}
+
+.Snumber {
+  font-size: 12pt;
+}
+
+.tag {
+  font-size: 8pt;
+}
+
+.title {
+  font-size: 17pt;
+}
+
+.info {
+  font-size: 12pt;
+}
+
+.selectBox {
+  max-width: 100px;
+  width: auto;
+  border-radius: 0 50px 50px 0;
+  background-color: #00bcd4;
+  color: #fff;
+  border: 0px rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  height: 45px;
+}
+
+.sizeBtnMat {
+  margin-right: 0;
+  border-radius: 50px 0 0 50px;
+}
+
+#size-btn {
+  width: auto;
+}
+
+.report {
+  width: 100%;
+  border: 0px rgba(0,0,0, 0.1) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.2);
+}
+.modal-footer {
+  border-top: none;
+}
+.modal-header {
+  border-bottom: none;
+}
+
+.word-break {
+  overflow-wrap: break-word !important;
+  word-break: break-word;
+}

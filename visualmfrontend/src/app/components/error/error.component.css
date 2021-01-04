@@ -1,0 +1,9 @@
+.form-control {
+  border-radius: 50px;
+  height: 45px;
+  margin-top: 30px;
+  border: 0 rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.1);
+  max-width: 250px;
+  padding-top: 0.6rem;
+}

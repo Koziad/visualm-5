@@ -1,0 +1,6 @@
+export enum MaterialType {
+  PLANT_BASED = 'PLANT-BASED',
+  ANIMAL_BASED = 'ANIMAL-BASED',
+  MICROBIAL = 'MICROBIAL',
+  INORGANIC = 'INORGANIC'
+}

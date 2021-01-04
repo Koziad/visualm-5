@@ -1,0 +1,21 @@
+input[type="file"] {
+  display: none;
+}
+
+.custom-file-upload {
+  color: #ffffff;
+  background-color: #00bcd4;
+  box-shadow: 0 0.5rem 20px rgba(0, 188, 212, 0.5);
+  cursor: pointer;
+  height: 45px;
+  width: 45px;
+}
+.custom-file-upload:hover {
+  color: #ffffff;
+  background-color: #009db0;
+  box-shadow: 0 0.5rem 20px rgba(0, 157, 176, 0.5);
+}
+
+.custom-file-upload > img {
+  margin-top: .3rem;
+}

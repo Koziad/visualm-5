@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+  font-family: "Calibri Light", "Roboto Light", sans-serif;
+  background-color: #F5F5F5;
+}
+
+.is-primary {
+    background-color: #00bcd4;
+    color: white;
+}
+
+.is-hidden {
+    display: none;
+}
+
+.card {
+  overflow: hidden;
+  height: 302px;
+  width: auto;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

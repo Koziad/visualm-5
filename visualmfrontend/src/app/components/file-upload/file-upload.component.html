@@ -1,0 +1,18 @@
+<div class="form-group">
+  <label for="file-upload-{{componentId}}" class="custom-file-upload rounded-circle btn" id="custom-upload">
+    <img src="assets/icons/plus.svg" height="20"/>
+  </label>
+  <input type="file" class="form-control-file" id="file-upload-{{componentId}}"
+	 (change)="handleFileUpload($event.target.files)" accept="image/jpeg,image/png,image/jpg">
+  <label for="custom-upload" class="label ml-2">Add media (JPG/PNG)</label>
+</div>
+
+<small class="help-block"
+       *ngIf="!isValid()" >
+  &bull; {{ getErrorMessage() }}
+</small>
+
+<small class="help-block"
+       *ngIf="isValid() && getFileName().trim().length > 0" >
+  &bull; File: {{ getFileName() }}
+</small>

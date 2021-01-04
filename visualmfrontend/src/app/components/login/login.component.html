@@ -1,0 +1,32 @@
+<div class="login">
+  <div class="loginInside">
+    <h1 class="text-center">Login</h1>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="text-center" *ngIf="invalidLogin">
+        <small class="smallTextError">Email/Password combination is wrong</small>
+      </div>
+      <div class="form-group">
+        <input #email="ngModel" name="emailAddress" [(ngModel)]="input.email" type="email" ngModel email="true" required class="form-control" id="loginEmail" placeholder="E-mail"/>
+        <div *ngIf="email.errors && (email.dirty || email.touched)" class="smallTextError">
+          <small class="smallTextError" *ngIf="email.errors.required">&bull; Email is required</small>
+          <small class="smallTextError" *ngIf="email.errors.email">&bull; Not an email</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input #password="ngModel" name="Password" [(ngModel)]="input.password" type="password" ngModel class="form-control" id="Password" placeholder="Password" required minlength="8"/>
+        <div *ngIf="password.errors && (password.dirty || password.touched)" class="smallTextError">
+          <small class="smallTextError" *ngIf="password.errors.required">&bull; Password is required</small>
+        </div>
+      </div>
+      <div class="form-group form-check">
+        <a routerLink="/reset-password">Forgot Password?</a>
+      </div>
+
+      <div class="form-group form-check smallTextError" *ngIf="!verified">
+        Please verify your account before using the tool.
+        <a href="javascript:void(0)" (click)="resendVerificationEmail()">Click here to resend verification email</a>
+      </div>
+      <button type="submit" [disabled]="f.invalid" class="btn btn-primary form-control"><img class="iconLoginButton" src="../../../assets/icons/account-outline.svg" alt="Login"/>Login</button>
+    </form>
+  </div>
+</div>

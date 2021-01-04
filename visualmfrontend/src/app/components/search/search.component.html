@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row imageAndSearch">
+    <div class="col-md-12 banner text-center">
+      <h1 class="mt-5">Search</h1>
+      <div>
+        <form class="search" autocomplete="off">
+          <input type="text" class="searchBox" id="search_box" (input)="OnInput($event)" (keyup.enter)="OnInput($event)" value=""
+                 placeholder="Type to search">
+          <div class="search-type form-check form-check-inline">
+            <label class="form-check-label" matTooltip="Fill in the ingredient(s)"> Ingredients <input class="form-check-input" type="checkbox" [checked]="ingredientSelected" (change)="ingredientSelected = !ingredientSelected; search('')" id="searchTypeIngredients" name="search_type" value="Ingredients">
+              <span class="checkmark"></span></label><br>
+            <label class="form-check-label" matTooltip="Fill in the title"> Title <input class="form-check-input" type="checkbox" [checked]="titleSelected" (change)="titleSelected = !titleSelected; search('')" id="searchTypeTitle" name="search_type" value="Title">
+              <span class="checkmark"></span></label><br>
+            <label class="form-check-label" matTooltip="Fill in the sequence number"> Sequence number <input class="form-check-input" type="checkbox"  [checked]="numberSelected" (change)="numberSelected = !numberSelected; search('')" id="searchTypeSequenceNumber" name="search_type" value="SequenceNumber">
+              <span class="checkmark"></span></label><br>
+            <label class="form-check-label" matTooltip="Vegan | Renewable | Reusable | Locally Abundant | By-Product | Home Compostable"> Tags <input class="form-check-input" type="checkbox" [checked]="tagsSelected" (change)="tagsSelected = !tagsSelected; search('')" id="searchTypeTags" name="search_type" value="Tags">
+              <span class="checkmark"></span></label><br>
+            <label class="form-check-label" matTooltip="Fill in the name of the user"> User <input class="form-check-input" type="checkbox" [checked]="userSelected" (change)="userSelected = !userSelected; search('')" id="searchTypeUser" name="search_type" value="User">
+              <span class="checkmark"></span></label><br>
+            <label class="form-check-label" matTooltip="Plant-Based | Animal-Based | Microbial | Inorganic"> Type <input class="form-check-input" type="checkbox" [checked]="typeSelected" (change)="typeSelected = !typeSelected; search('')" id="searchTypeType" name="search_type" value="Type">
+              <span class="checkmark"></span></label><br>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div style="text-align: center;"><img *ngIf="!loadingDone" src="assets/icons/loadingIcon.svg" alt="Loading"></div>
+  <div class="row mt-2" *ngIf="loadingDone">
+    <h1 class="noresults" *ngIf="matchingMaterials.length == 0">No search results</h1>
+    <div class="col-md-5 col-lg-3 mt-2 cardDiv" *ngFor="let material of matchingMaterials" >
+      <div class="card card-flip rounded shadow material-link" routerLink="/material/{{ material.getSequenceNumber() }}">
+
+        <div class="card-front">
+          <div class="card-body text-center">
+            <div class="materialTop">
+              <h2 class="h4 materialTitle text-uppercase">{{ material.name }}</h2>
+              <small class="materialId">#{{ material.getFormattedSequenceNumber() }}</small>
+            </div>
+            <img class="card-img-top rounded" alt="" *ngIf="!material.overviewURL"
+                 src="assets/images/missingImage.png"/>
+            <img class="card-img-top rounded" alt="" *ngIf="material.overviewURL"
+                 src="data:image/png;base64,{{ material.overviewURL }}"/>
+            <span class="badge is-primary badge-pill" *ngFor="let tag of material.getTags()">
+	            {{ materialTag[tag.name] }}
+            </span>
+            <hr>
+            <small class="materialBy">Made by: {{ material.user.firstname + " " + material.user.lastname }}</small>
+          </div>
+        </div>
+
+        <div class="card-back">
+          <div class="card-body text-center">
+            <h2 class="h4">Ingredients</h2>
+            <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1">
+              {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
+            </li>
+            <a class="info">Click for more info...</a>
+            <hr>
+            <small class="materialBy">Made by: <a routerLink="/user/{{material.user.id}}">{{ material.user.firstname + " " + material.user.lastname }}</a></small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button (click)="exportLabels()" type="button" *ngIf="!(matchingMaterials.length == 0)" matTooltip="Export labels" class="btn btn-primary form-control addBtn">
+  <img height="20" src="assets/icons/file-export-solid.svg" alt="Export labels"> Export
+</button>

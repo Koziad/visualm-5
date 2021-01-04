@@ -1,0 +1,9 @@
+.content-container {
+    margin-left: 175px;
+}
+
+@media screen and (max-width: 700px) {
+    .content-container {
+	margin-left: 0;
+    }
+}

@@ -1,0 +1,82 @@
+<nav>
+<div class="sidebar">
+  <a href="#"><img class="logo" src="assets/images/LOGO.png" width="150"></a>
+  <ul class="list-unstyled components">
+    <li>
+      <a routerLink="home" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Label Database</a>
+    </li>
+    <li>
+      <a routerLink="/materials/create" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Create Label</a>
+    </li>
+    <li>
+      <a routerLink="about" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| About</a>
+    </li>
+    <li *ngIf="!isLoggedIn();">
+      <a routerLink="login" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Login</a>
+    </li>
+    <li *ngIf="!isLoggedIn();">
+      <a routerLink="signup" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Signup</a>
+    </li>
+  </ul>
+  <div class="bottomNav">
+
+    <ul class="list-unstyled components profileNav">
+      <li *ngIf="isLoggedIn()">
+        <a routerLink="my-profile" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| {{user?.getFirstname()}}</a>
+      </li>
+      <li *ngIf="isLoggedIn() && user?.isAdmin()">
+        <a routerLink="admin" routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Admin Panel</a>
+      </li>
+      <li *ngIf="isLoggedIn()">
+        <a class="logout" (click)="onLogout()">| Logout</a>
+      </li>
+      <li>
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="license">CC BY-NC-SA 4.0 </a>
+      </li>
+    </ul>
+  </div>
+</div>
+</nav>
+<div class="pos-f-t mobileNav">
+  <nav class="navbar navbar-dark colorNav">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="p-4 colorNav menuMobile">
+      <ul id="menu">
+        <li>
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" routerLink="home"
+             routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Label Database</a>
+        </li>
+        <li>
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" routerLink="/materials/create"
+             routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Create Label</a>
+        </li>
+        <li *ngIf="!isLoggedIn();">
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" routerLink="login"
+             routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Login</a>
+        </li>
+        <li *ngIf="!isLoggedIn();">
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" routerLink="signup"
+             routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Signup</a>
+        </li>
+        <li *ngIf="isLoggedIn()">
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" routerLink="my-profile"
+             routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| {{user?.getFirstname()}}</a>
+        </li>
+        <li *ngIf="isLoggedIn() && user?.isAdmin()">
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" routerLink="admin"
+             routerLinkActive="activated-link" [routerLinkActiveOptions]="{exact:true}">| Admin Panel</a>
+        </li>
+        <li *ngIf="isLoggedIn()">
+          <a data-toggle="collapse" data-target="#navbarToggleExternalContent" class="logout" (click)="onLogout()">| Logout</a>
+        </li>
+        <li>
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="license">CC BY-NC-SA 4.0 </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,183 @@
+.sidebar {
+  margin: 0;
+  z-index: 10;
+  padding: 0;
+  width: 175px;
+  position: fixed;
+  background-color: #00bcd4;
+  height: 100%;
+  overflow: auto;
+}
+
+.activated-link {
+  background: #009db0;
+}
+
+.dropdown-item {
+  margin-left: 2rem;
+  border-left: 1px solid white;
+  width: auto;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: block;
+  color: #fff;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sidebar a:focus {
+  background-color: #009db0;
+}
+
+.sidebar-navigation li .fa {
+  margin-right: 10px;
+}
+
+.about {
+  margin-left: 10px;
+}
+
+.license {
+  font-size: .8rem;
+  color: #F5F5F5;
+}
+
+.sidebar-navigation li a:active,
+.sidebar-navigation li a:hover,
+.sidebar-navigation li a:focus {
+  text-decoration: none;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  text-decoration: none;
+  transition: all 0.3s;
+  background: #009db0;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+  margin-left: 175px;
+  padding: 1px 16px;
+  height: 100vh;
+}
+
+
+a[data-toggle="collapse"] {
+  position: relative;
+}
+
+.dropdown-toggle {
+  padding-left: 10px;
+  height: auto;
+}
+
+.dropdown-toggle::after {
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+.dropdown-item:focus {
+  text-decoration: none;
+  background-color: #009db0;
+}
+
+.logo {
+  border: 2px solid #FFFFFF;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.profileNav {
+  bottom: 0;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+.navProfile {
+  display: flex;
+  justify-content: center;
+}
+
+.profilePicture {
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: #00bcd4 double 3px;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.2);
+}
+
+.bottomNav {
+  display: flex;
+  flex-direction: column;
+  bottom: 0px;
+  position: absolute;
+}
+
+.bottomNav > ul > li {
+  width: 175px;
+  max-width: 100%;
+}
+
+.mobileNav {
+  display: none;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    display: none;
+  }
+  .navMobile {
+    background-color: #00bcd4;
+    padding-bottom: 25px;
+  }
+  .mobileNav {
+    display: block;
+  }
+  .colorNav {
+    background-color: #00bcd4;
+  }
+  .navbar-dark .navbar-toggler {
+    border: none;
+    margin-left: -10px;
+  }
+  .navbar-dark .navbar-toggler-icon {
+    background-image: url("src/assets/icons/menu.svg") !important;
+  }
+  .navbar-inverse .navbar-collapse {
+    background-color: transparent;
+    color: transparent;
+  }
+  button:focus {
+    outline: none !important;
+  }
+  #menu {
+    background-color: #00bcd4;
+    padding: 0 0 20px 20px;
+    margin: 0;
+  }
+  #menu li {
+    padding: 10px 0;
+    font-size: 22px;
+    list-style-type: none;
+  }
+  #menu a {
+    color: #FFFFFF;
+  }
+  .menuMobile {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}
+
+

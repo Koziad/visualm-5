@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 banner text-center">
+    </div>
+
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-12 text-center">
+      <h1>Latest labels</h1>
+      <img *ngIf="!loadingDone" src="assets/icons/loadingIcon.svg" alt="Loading">
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-3 mt-2 cardDiv" *ngFor="let material of materials" >
+        <div class="card card-flip rounded shadow material-link" routerLink="/material/{{ material.getSequenceNumber() }}">
+
+          <div class="card-front">
+            <div class="card-body text-center">
+              <div class="materialTop">
+                <h2 class="h4 materialTitle">{{ material.name }}</h2>
+                <small class="materialId">#{{ material.sequenceNumber }}</small>
+              </div>
+              <img class="card-img-top rounded" alt="" *ngIf="!material.overviewURL"
+                   src="assets/images/missingImage.png"/>
+              <img class="card-img-top rounded" alt="" *ngIf="material.overviewURL"
+                   src="data:image/png;base64,{{ material.overviewURL }}"/>
+              <span class="badge is-primary badge-pill" *ngFor="let tag of material.getTags()">
+	            {{ materialTag[tag.name] }}
+            </span>
+              <hr>
+              <small class="materialBy">Made by:{{ material.user.firstname + " " + material.user.lastname }}</small>
+            </div>
+          </div>
+
+          <div class="card-back">
+            <div class="card-body text-center">
+              <h2 class="h4">Ingredients</h2>
+              <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1">
+                {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
+              </li>
+              <a class="info">Click for more info...</a>
+              <hr>
+              <small class="materialBy">Made by: <a routerLink="/user/{{material.user.id}}">{{ material.user.firstname + " " + material.user.lastname }}</a></small>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

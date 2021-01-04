@@ -1,0 +1,21 @@
+<div class="verification-container" *ngIf="!errorOccurred">
+  <div class="verification-inside text-center" *ngIf="!verified">
+    <h1 class="text-center">Verify your email address</h1>
+    <p class="text-center">To start using the Material Sample Management Tool, verify your email</p>
+
+    <button class="btn btn-primary mt-3 form-control" (click)="verifyEmail()">Verify email</button>
+  </div>
+
+  <div class="verification-inside text-center" *ngIf="verified">
+    <h1 class="text-center">Email is already verified</h1>
+    <p class="text-center">This email is already verified. You will be redirected shortly</p>
+  </div>
+</div>
+
+
+<div class="verification-container" *ngIf="errorOccurred">
+  <div class="verification-inside text-center">
+    <h1 class="text-center">Something went wrong!</h1>
+    <p class="text-center">{{ errorMessage }}</p>
+  </div>
+</div>

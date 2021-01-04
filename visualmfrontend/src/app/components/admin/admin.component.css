@@ -1,0 +1,265 @@
+.card {
+  display: inline-block;
+}
+.table tbody:hover {
+  width: 100%;
+  background-color: #ddd;
+}
+.table {
+  background-color: #ffffff;
+}
+.table th {
+  text-align: left;
+}
+.mat-tab-header {
+  background-color: #00bcd4;
+}
+.mat-tab-header-active {
+  background-color: #009db0;
+}
+.mat-tab-label {
+  color: white;
+}
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #ffffff;
+}
+.form-control {
+  border-radius: 50px;
+  height: 45px;
+  width: 100%;
+  border: 0 rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.1);
+}
+.searchBox {
+  width: 92%;
+}
+.btn {
+  color: #ffffff;
+  background-color: #00bcd4;
+  box-shadow: 0 0.5rem 20px rgba(0, 188, 212, 0.5);
+  cursor: pointer;
+  min-width: 0;
+  margin-left: 10px;
+}
+.btn:hover {
+  color: #ffffff;
+  background-color: #009db0;
+  box-shadow: 0 0.5rem 20px rgba(0, 157, 176, 0.5);
+}
+.btn:disabled {
+  cursor: not-allowed;
+}
+.searchGroup {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+.mat-table {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  overflow: hidden !important;
+  border: 0 rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.1);
+}
+.mat-paginator {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  overflow: hidden !important;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.1);
+}
+.admin-data {
+  width: 90%;
+  margin: auto auto 20px;
+}
+.popupUser {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.importExport {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.userEditPopup {
+  overflow: auto;
+  z-index: 11;
+  margin: 2% auto;
+  border-radius: 20px;
+  height: auto;
+  width: 400px;
+  background-color: #f5f5f5;
+  border: 0 rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.2);
+}
+.editUserInput {
+  width: 350px;
+  margin: 10px auto;
+}
+.popupUserButtons {
+  display: flex;
+  justify-content: center;
+}
+.popupUserBtn {
+  width: 170px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.smallTextError {
+  color: crimson;
+  margin-left: 13px;
+}
+.form-check-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.form-check-label {
+  display: block;
+  position: relative;
+  padding-left: 28px;
+  padding-top: 3px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-left: 27px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+.checkmark {
+  position: absolute;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 0.2rem #00bcd4 solid;
+  box-shadow: 0 0.4rem 20px rgba(0, 0, 0, 0.2);
+}
+.form-check input:checked ~ .checkmark {
+  background-color: #00bcd4;
+  border: 0.2rem #fff solid;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.form-check input:checked ~ .checkmark:after {
+  display: block;
+}
+.form-check .checkmark:after {
+  left: 6px;
+  top: 1px;
+  width: 7px;
+  height: 15px;
+  margin-bottom: 10px;
+  border: solid white;
+  border-width: 0 0.2rem 0.2rem 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  border-radius: 10%;
+}
+.profilePicture {
+  border-radius: 50%;
+  border: #00bcd4 double 3px;
+  height: 150px;
+  width: 150px;
+  object-fit: cover;
+  display: block;
+  margin: 10px auto;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.2);
+}
+.checkBoxList {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (max-width: 700px) {
+  .admin-data {
+    width: 100%;
+  }
+  .searchBox {
+    width: 100%;
+  }
+  .searchGroup {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+.solvedText {
+  margin: 0 !important;
+  padding: 0;
+}
+.addBtn {
+  width: 45px;
+  height: 45px
+}
+.addBtnSearch {
+  width: 89%
+}
+.popupImportExportBtn {
+  width: 170px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+.importExportContent {
+  overflow: auto;
+  z-index: 11;
+  margin: 2% auto;
+  border-radius: 20px;
+  height: auto;
+  width: 400px;
+  background-color: #f5f5f5;
+  border: 0 rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-footer {
+  border-top: none;
+}
+.modal-header {
+  border-bottom: none;
+}
+
+.config-input-width {
+  width: 100%!important;
+}
+
+.small-padding {
+  padding: 20px;
+}
+
+.config-form-container {
+  max-width: 60%;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden !important;
+  border: 0 rgba(0, 0, 0, 0.05) solid;
+  box-shadow: 0 0.5rem 20px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 1000px) {
+  .config-form-container {
+    max-width: 90%;
+  }
+}

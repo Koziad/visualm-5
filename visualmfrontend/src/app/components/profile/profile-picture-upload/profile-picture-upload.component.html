@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label for="file-upload" class="custom-file-upload rounded-circle btn" id="custom-upload">
+    <img src="../../../../assets/icons/pencil.svg" height="20"/>
+  </label>
+  <input type="file" class="form-control-file" id="file-upload"
+         (change)="handleFileUpload($event.target.files)" accept="image/jpeg,image/png,image/jpg">
+</div>
+
+<small class="help-block"
+       *ngIf="!isValid()" >
+  &bull; {{ getErrorMessage() }}
+</small>

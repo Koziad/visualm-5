@@ -1,0 +1,51 @@
+<div class="signup">
+  <div class="singupInside">
+    <h1 class="text-center">Sign up</h1>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <div class="form-group">
+        <input #firstname="ngModel"  type="text" class="form-control" required [(ngModel)]="signup.firstname" pattern="^[a-zA-Z ]*$" name="Firstname" placeholder="* Firstname"/>
+        <div *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">
+          <small class="smallTextError" *ngIf="firstname.errors.required">&bull; Firstname is required</small>
+          <small class="smallTextError" *ngIf="firstname.errors.pattern">&bull; Not an valid name</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input #lastname="ngModel" type="text" class="form-control" required [(ngModel)]="signup.lastname" pattern="^[a-zA-Z ]*$" name="Lastname" placeholder="* Lastname"/>
+        <div *ngIf="lastname.errors && (lastname.dirty || lastname.touched)">
+          <small class="smallTextError" *ngIf="lastname.errors.required">&bull; Lastname is required</small>
+          <small class="smallTextError" *ngIf="lastname.errors.pattern">&bull; Not an valid name</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input #email="ngModel" (change)="onChange()" type="email" class="form-control" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" required [(ngModel)]="signup.email" name="Email" placeholder="* Email"/>
+        <small class="smallTextError" *ngIf="emailCheck">&bull; Email already exists</small>
+        <div *ngIf="email.errors && (email.dirty || email.touched)">
+          <small class="smallTextError" *ngIf="email.errors.required">&bull; Email is required</small>
+          <small class="smallTextError" *ngIf="email.errors.pattern">&bull; Not an valid email</small>
+          <small class="smallTextError" *ngIf="email.errors.incorrect">&bull; Email does not end with suffix '@{{config?.email_suffix}}'</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input #organisation="ngModel" [class.]="" disabled type="text" class="form-control" [(ngModel)]="signup.organisation" pattern="^[ a-zA-Z0-9_-]*$" name="Organisation" placeholder="Organisation"/>
+        <div *ngIf="organisation.errors && organisation.invalid">
+          <small class="smallTextError" *ngIf="organisation.errors.pattern">&bull; This is not an valid organisation</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input #password="ngModel" type="password" required class="form-control" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" [(ngModel)]="signup.password" name="Password" placeholder="* Password"/>
+        <div *ngIf="password.errors && (password.dirty || password.touched)">
+          <small class="smallTextError" *ngIf="password.errors.required">&bull; Password is required</small>
+          <small class="smallTextError" *ngIf="password.errors.pattern">&bull; Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <input #passwordRepeat="ngModel" type="password" required class="form-control" [(ngModel)]="signup.passwordRepeat" name="Repeat password" pattern="{{ password.value }}" placeholder="* Repeat password"/>
+        <div *ngIf="passwordRepeat.errors && (passwordRepeat.dirty || passwordRepeat.touched)">
+          <small class="smallTextError" *ngIf="passwordRepeat.errors.required">&bull; Repeat password is required<br/></small>
+          <small class="smallTextError" *ngIf="password.value!=passwordRepeat.value">&bull; Password & Confirm Password does not match.</small>
+        </div>
+      </div>
+      <button type="submit" [disabled]="f.invalid || (f.valid && this.onSubmitForm)" class="btn btn-primary form-control"><img class="iconSignupBtn" src="../../../assets/icons/account-plus-outline.svg" alt="Create account"/> Create account</button>
+    </form>
+  </div>
+</div>

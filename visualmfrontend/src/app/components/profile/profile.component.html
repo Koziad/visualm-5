@@ -1,0 +1,159 @@
+<div class="profile">
+  <div class="profileInside">
+    <div class="profileImage">
+      <img *ngIf="!loadingDone" src="assets/icons/loadingIcon.svg" alt="Loading">
+      <img class="profilePicture" *ngIf="!user?.getMediaURL()  && !isHidden && loadingDone"
+           src="assets/images/profile.png" alt="Profile picture"/>
+      <img class="profilePicture" *ngIf="user?.getMediaURL()  && !isHidden && loadingDone"
+           src="data:image/png;base64,{{ user?.getMediaURL() }}" alt="Profile picture"/>
+      <div class="imageEditBtn" *ngIf="isHidden">
+        <img class="profilePicture profileImageEdit"
+             *ngIf="!user?.getMediaURL()  && isHidden && !cropReady && loadingDone" src="assets/images/profile.png"
+             alt="Profile picture"/>
+        <img class="profilePicture profileImageEdit" *ngIf="user?.getMediaURL()  && !cropReady && loadingDone"
+             src="data:image/png;base64,{{ user?.getMediaURL() }}" alt="Profile picture"/>
+        <img class="profilePicture profileImageEdit" *ngIf="popupHidden && cropReady && loadingDone"
+             [src]="croppedImage" alt="Profile picture"/>
+        <div class="centerImage">
+          <app-profile-picture-upload class="centerBtn" (click)="onOpenCrop()" (change)="fileChangeEvent($event)" #file
+                                      *ngIf="isHidden"></app-profile-picture-upload>
+        </div>
+      </div>
+      <div *ngIf="!popupHidden" class="popupMain">
+        <div class="imageCropPopup">
+          <div class="crop">
+            <image-cropper
+              style="--cropper-overlay-color: rgba(255, 255, 255, 0.0)"
+              class="cropper"
+              *ngIf="isHidden"
+              [roundCropper]="true"
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="false"
+              [containWithinAspectRatio]="true"
+              [aspectRatio]="1 / 1"
+              [cropperMinHeight]="40"
+              [cropperMinWidth]="40"
+              alignImage="left"
+              [canvasRotation]="canvasRotation"
+              [transform]="transform"
+              backgroundColor="0,0,0"
+              format="png, jpeg, jpg"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+            <img [src]="croppedImage" *ngIf="cropReady" class="cropPreview" alt="image preview"/>
+          </div>
+          <div class="popupButtons">
+            <img *ngIf="!cropReady" height="50" width="50" src="assets/icons/loadingIcon.svg" alt="Loading">
+            <button type="button" *ngIf="cropReady" title="Zoom out" (click)="zoomOut()" class="rotateBtn"><img
+              height="23" src="assets/icons/magnify-minus-outline.svg" alt="Zoom out"></button>
+            <button type="button" *ngIf="cropReady" title="Zoom in" (click)="zoomIn()" class="rotateBtn"><img
+              height="23" src="assets/icons/magnify-plus-outline.svg" alt="Zoom in"></button>
+            <button type="button" *ngIf="cropReady" title="Rotate left" (click)="rotateLeft()" class="rotateBtn"><img
+              height="23" src="assets/icons/rotate-left.svg" alt="Rotate left"></button>
+            <button type="button" *ngIf="cropReady" title="Rotate right" (click)="rotateRight()" class="rotateBtn"><img
+              height="23" src="assets/icons/rotate-right.svg" alt="Rotate right"></button>
+            <button type="button" *ngIf="cropReady" title="Flip horizontal" (click)="flipHorizontal()"
+                    class="rotateBtn"><img height="23" src="assets/icons/flip-horizontal.svg" alt="Flip horizontal">
+            </button>
+            <button type="button" *ngIf="cropReady" title="Flip vertical" (click)="flipVertical()" class="rotateBtn">
+              <img height="23" src="assets/icons/flip-vertical.svg" alt="Flip vertical"></button>
+            <button type="button" *ngIf="cropReady" title="Reset image" (click)="resetImage()" class="rotateBtn"><img
+              height="23" src="assets/icons/undo.svg" alt="reset"></button>
+            <button type="button" (click)="onCloseCrop()" class="btn btn-primary form-control popupBtn"><img height="20"
+                                                                                                             src="assets/icons/close.svg"
+                                                                                                             alt="Cancel">
+              Cancel
+            </button>
+            <button type="button" *ngIf="cropReady" (click)="onSelectCrop()"
+                    class="btn btn-primary form-control popupBtn"><img height="20" src="assets/icons/image-plus.svg"
+                                                                       alt="Save"> Use image
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="loadingDone" class="innerProfileInfo">
+      <p *ngIf="!isHidden" class="h3 text-center">{{user?.getFirstname() + " " + user?.getLastname()}}</p>
+      <p *ngIf="!isHidden" class="h5 text-center">{{user?.getOrganisation()}}</p>
+      <form *ngIf="isHidden" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <input #firstname="ngModel" type="text" class="form-control editInput" name="Firstname" required
+               [(ngModel)]="edit.firstname" pattern="^[a-zA-Z ]*$" placeholder="* Firstname"/>
+        <div *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">
+          <small class="smallTextError" *ngIf="firstname.errors.required">&bull; Firstname is required</small>
+          <small class="smallTextError" *ngIf="firstname.errors.pattern">&bull; This is not a name</small>
+        </div>
+        <input #lastname="ngModel" type="text" class="form-control editInput" name="Lastname" required
+               [(ngModel)]="edit.lastname" pattern="^[a-zA-Z ]*$" placeholder="* Lastname"/>
+        <div *ngIf="lastname.errors && (lastname.dirty || lastname.touched)">
+          <small class="smallTextError" *ngIf="lastname.errors.required">&bull; Lastname is required</small>
+          <small class="smallTextError" *ngIf="lastname.errors.pattern">&bull; This is not a name</small>
+        </div>
+        <div class="SaveCancelEdit">
+        <button type="button" (click)="onEdit()" class="btn btn-primary form-control saveBtn btnSaveCancelEdit"><img height="20" src="assets/icons/close.svg" alt="Cancel"> Cancel</button>
+        <button type="submit" [disabled]="f.invalid" class="btn btn-primary form-control saveBtn btnSaveCancelEdit"><img height="20" src="assets/icons/content-save.svg" alt="Save"> Save</button>
+        </div>
+      </form>
+      <div class="innerProfileBtn">
+        <button *ngIf="!isHidden && isLoggedIn()" type="button" (click)="onClick()" class="btn btn-primary form-control roundEmailBtn"><img
+          height="20" src="assets/icons/email-outline.svg" alt="Mail"> {{email}}</button>
+        <button *ngIf="!isHidden && !notLoggedinUser" type="button" (click)="onEdit()" class="btn btn-primary form-control"><img height="20"
+                                                                                                             src="assets/icons/pencil.svg"
+                                                                                                             alt="Edit profile">
+          Edit Profile
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="col-md-12 text-center">
+      <h2 *ngIf="notLoggedinUser">Labels</h2>
+      <h2 *ngIf="!notLoggedinUser">My Labels</h2>
+      <img *ngIf="!loadingMaterialsDone && materials.length !== 0" src="assets/icons/loadingIcon.svg" alt="Loading">
+    </div>
+  </div>
+
+  <div class="row mt-2" *ngIf="materials.length !== 0; else noMaterials">
+    <div class="col-md-5 col-lg-3 mt-2 cardDiv" *ngFor="let material of materials">
+      <div class="card card-flip rounded shadow material-link" routerLink="/material/{{ material.getSequenceNumber() }}">
+
+        <div class="card-front">
+          <div class="card-body text-center">
+            <div class="materialTop">
+              <h2 class="h4 materialTitle text-uppercase">{{ material.name }}</h2><p class="materialDraft" *ngIf="material.saveStatus == 'DRAFT'">DRAFT</p>
+              <small class="materialId">#{{ material.getFormattedSequenceNumber() }}</small>
+            </div>
+            <img class="card-img-top rounded" alt="" *ngIf="!material.overviewURL"
+                 src="assets/images/missingImage.png"/>
+            <img class="card-img-top rounded" alt="" *ngIf="material.overviewURL"
+                 src="data:image/png;base64,{{ material.overviewURL }}"/>
+            <span class="badge is-primary badge-pill" *ngFor="let tag of material.getTags()">
+	            {{ materialTag[tag.name] }}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-back">
+          <div class="card-body text-center">
+            <h2 class="h4">Ingredients</h2>
+            <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1">
+              {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
+            </li>
+            <a class="info">Click for more info...</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noMaterials>
+    <div class="row mt-2">
+      <div class="col-md-12 mt-2 text-center">
+        No labels found
+      </div>
+    </div>
+  </ng-template>
+</div>

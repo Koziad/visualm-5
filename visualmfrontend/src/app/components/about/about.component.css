@@ -1,0 +1,15 @@
+.banner {
+  background-image: url('src/assets/images/frontpage-img.jpg');
+  height: 25vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin-bottom: 2%;
+}
+
+p {
+  margin-left: 20%;
+  width: 60%;
+  font-size: 18px;
+}
