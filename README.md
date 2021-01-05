@@ -15,7 +15,7 @@ This tool makes it easier to keep track of the new materials and view its inform
 ### Configuration
 Follow the instructions below if you want to install the Material Sample Management Tool using Git.
 ```bash
-git clone https://gitlab.fdmci.hva.nl/se-ewa-2020-2021/visualm-5.git
+git clone https://github.com/Koziad/visualm-5.git
 ```
 #### Bitly
 This project makes use of the Bitly API to generate short links for the sources of labels. To get the conversion working,
