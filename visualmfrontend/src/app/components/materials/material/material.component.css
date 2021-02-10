@@ -2,6 +2,16 @@
   font-size: 0.9rem !important;
 }
 
+div {
+  font-family: "Calibri Light", "Roboto Light", sans-serif;
+  letter-spacing: 2px;
+}
+
+h1, h2, h3 {
+  font-family: "Calibri Light", "Roboto Light", sans-serif;
+  letter-spacing: 2px;
+}
+
 .btn {
   color: #ffffff;
   background-color: #00bcd4;
@@ -82,10 +92,19 @@ hr {
 }
 
 .name {
+  letter-spacing: 4px;
   font-size: 25pt;
 }
 
+.nameTitle {
+  letter-spacing: 4px;
+  font-size: 25pt;
+  width: 500px;
+  margin-left: -42.5%;
+}
+
 .type {
+  letter-spacing: 4px;
   font-size: 15pt;
 }
 
@@ -94,7 +113,7 @@ hr {
 }
 
 .tag {
-  font-size: 8pt;
+  font-size: 10pt;
 }
 
 .title {
@@ -141,4 +160,18 @@ hr {
 .word-break {
   overflow-wrap: break-word !important;
   word-break: break-word;
+}
+
+.marker {
+  position: relative;
+  margin-top: -12.5%;
+  width: 80%;
+}
+
+.maker {
+  margin-top: -1%;
+}
+
+.MaterialPDF {
+  font-family: "Calibri Light", "Roboto Light", sans-serif;
 }
