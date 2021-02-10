@@ -108,7 +108,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
       totalVolume += currentMaterialIngredient.getAmount();
     }
 
-    let partOfRatio = totalVolume/10;
+    let partOfRatio = totalVolume/100;
 
     for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
       const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
