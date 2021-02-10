@@ -38,6 +38,7 @@ import {AuthInterceptor} from './interceptors/auth.interceptor';
 import {MaterialsService} from './services/materials.service';
 import { ErrorComponent } from './components/error/error.component';
 import {AboutComponent} from './components/about/about.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import {AboutComponent} from './components/about/about.component';
     MatInputModule,
     MatSnackBarModule,
     MatButtonModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatExpansionModule
   ],
   providers: [
     {

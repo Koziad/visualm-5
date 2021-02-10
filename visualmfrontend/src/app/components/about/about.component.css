@@ -8,8 +8,12 @@
   margin-bottom: 2%;
 }
 
-p {
+p, h2 {
   margin-left: 20%;
   width: 60%;
   font-size: 18px;
+}
+mat-expansion-panel{
+  margin-left: 20%;
+  width: 60%;
 }

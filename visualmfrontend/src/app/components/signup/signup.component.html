@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="form-group">
-        <input #email="ngModel" (change)="onChange()" type="email" class="form-control" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" required [(ngModel)]="signup.email" name="Email" placeholder="* Email"/>
+        <input #email="ngModel" (change)="onChange()" type="email" class="form-control" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" required [(ngModel)]="signup.email" name="Email" placeholder="* Email '@hva.nl'"/>
         <small class="smallTextError" *ngIf="emailCheck">&bull; Email already exists</small>
         <div *ngIf="email.errors && (email.dirty || email.touched)">
           <small class="smallTextError" *ngIf="email.errors.required">&bull; Email is required</small>
