@@ -142,9 +142,10 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
 
     this.materialForm.get('changes').setValue(this.material.getChanges());
     // Convert string to arr by delimiter used in db
-    this.steps = this.material.getSteps().split('|');
+    if (this.material.getSteps() != "No Steps added yet") {
+      this.steps = this.material.getSteps().split('|');
+    }
     this.materialForm.get('status').setValue(this.material.getSaveStatus());
-
     this.materialForm.get('step').updateValueAndValidity();
     this.materialForm.get('ingredient').updateValueAndValidity();
     this.materialForm.get('changes').updateValueAndValidity();
@@ -165,7 +166,7 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
   }
 
   onSubmit(): void {
-    if (!this.materialForm.valid) {
+    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
       this.materialForm.markAllAsTouched();
 
       // TODO: one method
@@ -190,11 +191,19 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
       return;
     }
 
-    const changes = this.materialForm.get('changes').value.trim();
+
+    let changes = "No changes";
+    if (this.materialForm.get('changes').value != null) {
+      changes = this.materialForm.get('changes').value.trim();
+    }
     let reference = `By ${this.recipeAuthor} - ${this.recipeTitle} - ${this.recipeYear}`;
 
     if (!this.materialForm.get('variationOn').value) {
-      reference = `By ${this.materialForm.get('referenceAuthor').value.trim()} - ${this.materialForm.get('referenceTitle').value.trim()} - ${this.materialForm.get('referenceYear').value}`;
+      if (this.materialForm.get('referenceAuthor').value != null || this.materialForm.get('referenceTitle').value != null) {
+        reference = `By ${this.materialForm.get('referenceAuthor').value.trim()} - ${this.materialForm.get('referenceTitle').value.trim()} - ${this.materialForm.get('referenceYear').value}`;
+      } else {
+        reference = "No references"
+      }
       this.parentId = null;
     }
 
@@ -204,6 +213,19 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
       const tag: Tag = new Tag((Object.keys(MaterialTag).indexOf(value) + 1), value);
       tags.push(tag);
     });
+
+    if (this.bitlyURL == null) {
+      this.bitlyURL = 'No link added';
+    }
+
+    let title = "Untitled";
+    if (this.materialForm.get('title').value != null) {
+      title = this.materialForm.get('title').value.trim();
+    }
+
+    if (this.steps.length == 0) {
+      this.steps.push("No Steps added yet")
+    }
 
     const material: Material = new Material(this.material.getSequenceNumber(), this.materialForm.get('title').value.trim(),
       changes, this.steps.join('|'), this.bitlyURL, tags, this.materialIngredients, this.materialForm.get('status').value,
