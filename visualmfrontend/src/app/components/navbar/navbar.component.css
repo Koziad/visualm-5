@@ -94,6 +94,10 @@ a[data-toggle="collapse"] {
   border-radius: 10px;
 }
 
+.hvaLogo{
+  margin-left: 7%;
+}
+
 .profileNav {
   bottom: 0;
 }

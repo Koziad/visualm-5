@@ -8,8 +8,27 @@
   margin-bottom: 2%;
 }
 
-p {
-  margin-left: 20%;
+p, h2 {
+  margin: auto;
   width: 60%;
   font-size: 18px;
+}
+mat-expansion-panel{
+  margin: auto;
+  width: 60%;
+}
+mat-expansion-panel h2{
+  line-height: 18px;
+}
+@media screen and (max-width: 1000px) {
+  p, h2 {
+    width: 90%;
+  }
+  mat-expansion-panel{
+    width: 90%;
+  }
+  mat-expansion-panel h2{
+    font-size: 15px;
+    line-height: 13px;
+  }
 }

@@ -132,7 +132,7 @@ export class MaterialFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (!this.materialForm.valid) {
+    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
       this.materialForm.markAllAsTouched();
 
       this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
@@ -143,11 +143,18 @@ export class MaterialFormComponent implements OnInit {
       return;
     }
 
-    const changes = this.materialForm.get('changes').value.trim();
+    let changes = "No changes";
+    if (this.materialForm.get('changes').value != null) {
+      changes = this.materialForm.get('changes').value.trim();
+    }
     let reference = `By ${this.recipeAuthor} - ${this.recipeTitle} - ${this.recipeYear}`;
 
     if (!this.materialForm.get('variationOn').value) {
-      reference = `By ${this.materialForm.get('referenceAuthor').value.trim()} - ${this.materialForm.get('referenceTitle').value.trim()} - ${this.materialForm.get('referenceYear').value}`;
+      if (this.materialForm.get('referenceAuthor').value != null || this.materialForm.get('referenceTitle').value != null) {
+        reference = `By ${this.materialForm.get('referenceAuthor').value.trim()} - ${this.materialForm.get('referenceTitle').value.trim()} - ${this.materialForm.get('referenceYear').value}`;
+      } else {
+        reference = "No references"
+      }
       this.parentId = null;
     }
 
@@ -158,7 +165,20 @@ export class MaterialFormComponent implements OnInit {
       tags.push(tag);
     });
 
-    const material: Material = new Material(0, this.materialForm.get('title').value.trim(),
+    if (this.bitlyURL == null) {
+      this.bitlyURL = 'No link added';
+    }
+
+    let title = "Untitled";
+    if (this.materialForm.get('title').value != null) {
+      title = this.materialForm.get('title').value.trim();
+    }
+
+    if (this.steps.length == 0) {
+      this.steps.push("No Steps added yet")
+    }
+
+    const material: Material = new Material(0, title,
       changes, this.steps.join('|'), this.bitlyURL, tags, this.materialIngredients,
       this.materialForm.get('status').value, this.materialForm.get('type').value, this.user, this.parentId, reference);
 
@@ -169,6 +189,7 @@ export class MaterialFormComponent implements OnInit {
       this.creationFailed = false;
       this.router.navigate(['/home']);
     }, error => {
+      console.log(error);
       this.creationFailed = true;
     });
   }

@@ -5,7 +5,7 @@ body{
 }
 
 * {
-  font-family: "Calibri Light", "Roboto Light", sans-serif;
+  font-family: "Calibri Light", "Roboto Light", sans-serif !important;
 }
 
 .is-primary {
