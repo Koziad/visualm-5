@@ -74,7 +74,7 @@ export class MaterialFormComponent implements OnInit {
     const whitespaceCheck: RegExp = new RegExp('\\S');
 
     this.materialForm = new FormGroup({
-      'title': new FormControl(null, [Validators.required, Validators.maxLength(25),
+      'title': new FormControl(null, [Validators.required, Validators.maxLength(20),
         Validators.pattern(whitespaceCheck)]),
       'url': new FormControl(null, this.validURL.bind(this)),
       'step': new FormControl(null, this.emptySteps.bind(this)),
