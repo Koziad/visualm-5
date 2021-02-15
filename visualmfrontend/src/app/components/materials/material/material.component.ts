@@ -103,10 +103,10 @@ export class MaterialComponent implements OnInit, OnDestroy {
     let totalVolume = 0;
     this.ratio = "Ratio of ";
 
-      for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
-        const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
-        totalVolume += currentMaterialIngredient.getAmount();
-      }
+    for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
+      const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
+      totalVolume += currentMaterialIngredient.getAmount();
+    }
 
       let partOfRatio = totalVolume/100;
 
@@ -158,6 +158,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
         pdf.line(203, 288, 210, 288); // horizontal
 
         pdf.setLineDashPattern([0.5, 0.5], 0);
+        pdf.setDrawColor(211,211,211);
         pdf.line(16, 50, 200, 50); //1st line
         pdf.line(16, 90, 200, 90); // 2nd line
         pdf.line(16, 100, 200, 100); // 3rd line
@@ -184,6 +185,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
         pdf.line(143.5, 204, 148, 204); // horizontal
 
         pdf.setLineDashPattern([0.5, 0.5], 0);
+        pdf.setDrawColor(211,211,211);
         pdf.line(13, 35, 138, 35); //1st line
         pdf.line(13, 62, 138, 62); // 2nd line
         pdf.line(13, 70, 138, 70); // 3rd line
@@ -210,6 +212,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
         pdf.line(101.5, 143.5, 105, 143.5); // horizontal
 
         pdf.setLineDashPattern([0.5, 0.5], 0);
+        pdf.setDrawColor(211,211,211);
         pdf.line(10, 25, 98, 25); //1st line
         pdf.line(10, 44, 98, 44); // 2nd line
         pdf.line(10, 48.5, 98, 48.5); // 3rd line

@@ -4,6 +4,10 @@ body{
   background-color: #F5F5F5;
 }
 
+* {
+  font-family: "Calibri Light", "Roboto Light", sans-serif !important;
+}
+
 .is-primary {
     background-color: #00bcd4;
     color: white;
@@ -20,4 +24,4 @@ body{
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Calibri Light", "Roboto Light", sans-serif; }
