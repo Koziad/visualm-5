@@ -58,6 +58,10 @@ export class Material {
     return this.steps;
   }
 
+  public setSteps(step): string {
+    return this.steps;
+  }
+
   public getCreationDate(): Date {
     return this.creationDate;
   }

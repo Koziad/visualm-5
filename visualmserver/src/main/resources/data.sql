@@ -69,7 +69,7 @@ INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`typ
 VALUES (26,'Biofoam','Cook|Pot|Scale|Spoons|Whisk|Lego sheet|Egg holders','https://bit.ly/37o04DX','DRAFT','MICROBIAL','2020-11-14','https://bit.ly/37o04DX',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
-VALUES (42,'Glas','Verwarm het zand','https://bit.ly/3jR5Scx','DRAFT','ANIMAL_BASED','2020-11-16','https://bit.ly/3jR5Scx',NULL,9,NULL, 'By John Doe - Foo bar - 2019');
+VALUES (42,'Glas','Verwarm het zand','https://bit.ly/3jR5Scx','DRAFT','ANIMAL_BASED','2020-11-16','https://bit.ly/3jR5Scx',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
 VALUES (84,'Biofoam','Preparation|Mixing and dissolving the ingredients|Cooking the ingredients, creating foam|Casting the foam','https://bit.ly/37o04DX','PUBLISHED','INORGANIC','2020-11-16','https://bit.ly/37o04DX',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
@@ -84,10 +84,10 @@ INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`typ
 VALUES (87,'Mango Leather','Preparation|Mixing the ingredients and activating the starch|Casting and dehydrating in the oven|Air drying','https://bit.ly/36HQytn','PUBLISHED','PLANT_BASED','2020-11-16','https://bit.ly/36HQytn',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
-VALUES (89,'Starch Rubber','Preparation|Mixing and dissolving the ingredients|Cooking the ingredients|Casting','https://bit.ly/3kGyVPz','PUBLISHED','ANIMAL_BASED','2020-11-16','https://bit.ly/3kGyVPz',NULL,10,NULL, 'By John Doe - Foo bar - 2019');
+VALUES (89,'Starch Rubber','Preparation|Mixing and dissolving the ingredients|Cooking the ingredients|Casting','https://bit.ly/3kGyVPz','PUBLISHED','ANIMAL_BASED','2020-11-16','https://bit.ly/3kGyVPz',NULL,3,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
- VALUES (90,'Flower Paper','Drying the flowers|Separating and boiling|Option A: Pounding|Option B: Blending|Moulding slurry onto the screen|Drying and pressing|Saving the boiling liquid as dye','https://bit.ly/2UvtIPZ','PUBLISHED','PLANT_BASED','2020-11-16','https://bit.ly/2UvtIPZ',NULL,10,NULL, 'By John Doe - Foo bar - 2019');
+ VALUES (90,'Flower Paper','Drying the flowers|Separating and boiling|Option A: Pounding|Option B: Blending|Moulding slurry onto the screen|Drying and pressing|Saving the boiling liquid as dye','https://bit.ly/2UvtIPZ','PUBLISHED','PLANT_BASED','2020-11-16','https://bit.ly/2UvtIPZ',NULL,3,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
 VALUES (230,'Mango Leather','Preparation|Mixing the ingredients and activating the starch|Casting and dehydrating in the oven|Air drying','https://bit.ly/36HQytn','DRAFT','PLANT_BASED','2020-12-08','https://bit.ly/36HQytn',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
@@ -186,6 +186,6 @@ INSERT INTO `material_has_ingredient` (`sequence_number`,`id`,`amount`) VALUES (
 INSERT INTO `material_has_ingredient` (`sequence_number`,`id`,`amount`) VALUES (234,64,30);
 
 -- Default app config
-INSERT INTO `app_config` (`key_name`, `value`) VALUES ('email_suffix', 'tmp.nl');
+INSERT INTO `app_config` (`key_name`, `value`) VALUES ('email_suffix', 'hva.nl');
 INSERT INTO `app_config` (`key_name`, `value`) VALUES ('organisation', 'Github');
 INSERT INTO `app_config` (`key_name`, `value`) VALUES ('logo_path', 'assets/images/HvAlogo.png');

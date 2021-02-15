@@ -50,7 +50,6 @@ export class SearchComponent implements OnInit {
         }
       });
       this.searchQuerySubscription = this.activatedRoute.queryParams.subscribe(value => {
-        console.log(value.search);
         if (value.search) {
           this.splitSearchQuery(value.search);
         }
@@ -92,7 +91,6 @@ export class SearchComponent implements OnInit {
     this.search(searchQuery.replace('#', '').replace(/^0+/, ''));
 
     this.matchingMaterials = [...this.sortedMaterials.keys()];
-    console.log(this.sortedMaterials);
   }
 
   //Searches trough the materials and counts the ranking score
@@ -273,6 +271,10 @@ export class SearchComponent implements OnInit {
         queryParams: {search: searchQuery},
         queryParamsHandling: 'merge'
       });
+
+    if (searchQuery == "") {
+      this.matchingMaterials = this.allMaterials;
+    }
   }
 
   OnInput(event: any) {

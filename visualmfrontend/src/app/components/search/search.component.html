@@ -1,11 +1,9 @@
 <div class="container-fluid">
   <div class="row imageAndSearch">
     <div class="col-md-12 banner text-center">
-      <h1 class="mt-5">Search</h1>
       <div>
         <form class="search" autocomplete="off">
-          <input type="text" class="searchBox" id="search_box" (input)="OnInput($event)" (keyup.enter)="OnInput($event)" value=""
-                 placeholder="Type to search">
+          <input type="text" class="searchBox" id="search_box" (keyup)="OnInput($event)" value="" placeholder="Type to search">
           <div class="search-type form-check form-check-inline">
             <label class="form-check-label" matTooltip="Fill in the ingredient(s)"> Ingredients <input class="form-check-input" type="checkbox" [checked]="ingredientSelected" (change)="ingredientSelected = !ingredientSelected; search('')" id="searchTypeIngredients" name="search_type" value="Ingredients">
               <span class="checkmark"></span></label><br>
