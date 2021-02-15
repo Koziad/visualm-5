@@ -45,7 +45,7 @@
               &bull; Please click on the Add URL button to generate a QR code.
             </small>
 
-            <a matTooltip="The URL for the QR Code has to begin with http://" matTooltipPosition="after">
+            <a matTooltip="Please provide a URL linking to the main reference you used to create this sample, URL has to start with http://" matTooltipPosition="after">
               <img src="assets/icons/information-outline.svg" height="18"/>
             </a>
           </div>
@@ -63,7 +63,7 @@
 
             <h2 class="mt-3 h2">
               Type:
-              <a matTooltip="Type of Label (only 1)" matTooltipPosition="after">
+              <a matTooltip="Tick one of these categories. Note: microbial includes fungi, algae and other micro organisms" matTooltipPosition="after">
                 <img src="assets/icons/information-outline.svg" height="18"/>
               </a>
             </h2>
@@ -83,7 +83,7 @@
             </span>
 
             <h2 class="mt-3 h2">Sustainability tags:
-              <a matTooltip="Sustainabity Tags for Label (optional)" matTooltipPosition="after">
+              <a matTooltip="Tick all that apply, for definitions please refer to FAQ on the About page" matTooltipPosition="after">
                 <img src="assets/icons/information-outline.svg" height="18"/>
               </a>
             </h2>
@@ -197,7 +197,7 @@
                 <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/50]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
-                <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()"
+                <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()" id="add-step-btn"
                         [disabled]="steps.length >= maximumSteps">
                   <img src="assets/icons/plus.svg" height="20"/>
                 </button>
@@ -293,7 +293,7 @@
               </div>
 
               <div class="col-md-12 col-lg-6">
-                <button type="button" class="btn is-primary rounded-pill buttonMargin"
+                <button type="button" class="btn is-primary rounded-pill buttonMargin" id="sequence-number-search-btn"
                         (click)="onSequenceNumberSearch()">
                   <img height="18" src="assets/icons/magnify.svg">
                   Search

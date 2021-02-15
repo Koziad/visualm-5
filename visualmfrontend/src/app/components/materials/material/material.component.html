@@ -1,31 +1,31 @@
-<div class="container-fluid Material">
+<div id="Material" class="container-fluid Material">
   <div class="pt-5">
     <div class="shadow bg-light p-3 outerMaterial">
-      <button type="button" class="btn is-primary form-control sizeBtnMat" id="size-btn" (click)="generatePdf()"
+      <button type="button" class="btn is-primary form-control sizeBtnMat pdfButton" id="size-btn" (click)="generatePdf()"
               *ngIf="canGeneratePDF">Generate PDF Label
       </button>
-      <select (change)="onSelect($event.target.value)" class="custom-select selectBox m-2" *ngIf="canGeneratePDF">
+      <select id="options" (change)="onSelect($event.target.value)" class="custom-select selectBox m-2" *ngIf="canGeneratePDF">
         <option value="a4" default>A4</option>
         <option value="a5">A5</option>
         <option value="a6">A6</option>
       </select>
-      <button type="button" class="btn btn-primary form-control ml-2"
+      <button id="duplicate" type="button" class="btn btn-primary form-control ml-2"
               routerLink="/materials/edit/{{ material?.getSequenceNumber() }}"
               [queryParams]="{action: 'duplicate'}"
               *ngIf="canDuplicate">Duplicate Label
       </button>
 
-      <button type="button" class="btn btn-primary form-control float-right ml-2" *ngIf="canReport"
+      <button id="report" type="button" class="btn btn-primary form-control float-right ml-2" *ngIf="canReport"
               data-toggle="modal" data-target="#reportModal" matTooltip="Report">
         <img height="20" src="assets/icons/outlined_flag-24px.svg">
       </button>
 
-      <button type="button" class="btn btn-primary form-control float-right" *ngIf="canEdit"
+      <button id="edit" type="button" class="btn btn-primary form-control float-right" *ngIf="canEdit"
               routerLink="/materials/edit/{{ material?.getSequenceNumber() }}" matTooltip="Edit">
         <img height="20" src="assets/icons/pencil.svg">
       </button>
 
-
+      <!-- Report Modal -->
       <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel"
            aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -39,8 +39,8 @@
                      id="reportMessage" placeholder="Report Message" required>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
-              <button type="submit" (click)="onReport()" class="btn btn-primary form-control" data-dismiss="modal">
+              <button id="cancelReport" type="button" class="btn btn-secondary form-control" data-dismiss="modal">Cancel</button>
+              <button id="submitReport" type="submit" (click)="onReport()" class="btn btn-primary form-control" data-dismiss="modal">
                 Report
               </button>
             </div>
@@ -48,7 +48,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4 mt-2">
+        <div id="qrCode" class="col-md-4 mt-2">
           <img src="{{this.logoPath}}" style="width: 10rem;"
                [ngClass]="{'is-hidden': material?.getQRCodeURL() }"/>
           <ngx-qrcode
@@ -65,27 +65,27 @@
 
 
         <div class="col-md-4 text-center">
-          <h1 class="name text-uppercase">{{ material?.getName() }}</h1>
+          <h1 id="materialName" class="name text-uppercase">{{ material?.getName() }}</h1>
 
-          <h3 class="type">{{ materialType[material?.getType()] }}</h3>
-          <h3 class="Snumber">
+          <h3 id="materialType" class="type">{{ materialType[material?.getType()] }}</h3>
+          <h3 id="materialNumber" class="Snumber">
             #{{ material?.getFormattedSequenceNumber() }}</h3>
 
-          <div class="tags-container">
+          <div id="tagsContainer" class="tags-container">
             <span class="badge is-primary badge-pill ml-1 tag" *ngFor="let tag of material?.getTags()">
               {{ materialTag[tag.name] }}
             </span>
           </div>
         </div>
 
-        <div class="col-md-4">
+        <div id="logo" class="col-md-4">
           <img class="rounded float-right" style="width: 10rem;" alt="" src="{{this.logoPath}}"/>
         </div>
       </div>
 
       <hr/>
 
-      <div class="row mt-4">
+      <div id="ingredients" class="row mt-4">
         <div class="col-md-6">
           <h1 class="title">INGREDIENTS:</h1>
           <div class="ingredient-container mt-3">
@@ -100,7 +100,7 @@
           </div>
         </div>
 
-        <div class="col-md-6">
+        <div id="makingProcedure" class="col-md-6">
           <h1 class="title">MAKING PROCEDURE:</h1>
           <div class="procedure-container mt-2">
             <ul>
@@ -114,7 +114,7 @@
 
       </div>
 
-      <div class="row mt-4">
+      <div id="reference" class="row mt-4">
         <div class="col-md-6">
           <h1 class="title">REFERENCES & CHANGES: </h1>
           <p class="info" *ngIf="material?.getParentId()">
@@ -133,7 +133,7 @@
 
       <hr/>
 
-      <div class="row">
+      <div id="creator" class="row">
         <div *ngIf="loadingDone" class="col-md-12 text-center">
           <p>Maker: {{ user?.getFirstname() + " " + user?.getLastname()}}
             - {{material?.getCreationDate() | date:'dd-MM-yyyy'}} <b style="font-weight: normal" *ngIf="isLoggedIn()">
@@ -142,7 +142,7 @@
       </div>
     </div>
 
-    <div class="shadow bg-light p-3 outerMaterial mt-5" *ngIf="material?.getOverviewURL() || material?.getCloseUpURL()">
+    <div id="media" class="shadow bg-light p-3 outerMaterial mt-5" *ngIf="material?.getOverviewURL() || material?.getCloseUpURL()">
       <div class="row">
         <div class="col-md-12 text-center">
           <h1 class="h1">Label Media: </h1>
@@ -162,6 +162,8 @@
     </div>
   </div>
 </div>
+
+
 <!-- PDF Label Design -->
 
 <div class="sammie" id="pdfLabel">
@@ -211,7 +213,7 @@
 
 
             <div class="col-md-4 text-center">
-              <h1 class="name text-uppercase">{{ material?.getName() }}</h1>
+              <h1 class="nameTitle text-uppercase">{{ material?.getName() }}</h1>
 
               <h3 class="type">{{ materialType[material?.getType()] }}</h3>
               <h3 class="Snumber">
@@ -240,11 +242,9 @@
                     {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
                   </li>
                 </ul>
-                Ratio of
-                <p class="info" *ngFor="let mi of material?.getMaterialIngredients()" style="display: inline-block">
-                  {{mi.amount}} {{mi.ingredient.name}}:
+                <p class="info" style="display: inline-block">
+                  {{ ratio }}
                 </p>
-                by weight
               </div>
             </div>
 
@@ -279,14 +279,15 @@
             </div>
           </div>
 
-          <hr/>
 
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <p>Maker: {{ user?.getFirstname() + " " + user?.getLastname()}}
-                - {{material?.getCreationDate() | date:'dd-MM-yyyy'}} - {{ user?.getEmail() }}</p>
-            </div>
-          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <hr class="marker"/>
+          <p class="maker">Maker: {{ user?.getFirstname() + " " + user?.getLastname()}}
+            - {{material?.getCreationDate() | date:'dd-MM-yyyy'}} - {{ user?.getEmail() }}</p>
         </div>
       </div>
     </div>
