@@ -240,11 +240,9 @@
                     {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
                   </li>
                 </ul>
-                Ratio of
-                <p class="info" *ngFor="let mi of material?.getMaterialIngredients()" style="display: inline-block">
-                  {{mi.amount}} {{mi.ingredient.name}}:
+                <p class="info" style="display: inline-block">
+                  {{ ratio }}
                 </p>
-                by weight
               </div>
             </div>
 
