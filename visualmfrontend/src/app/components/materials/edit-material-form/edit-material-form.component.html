@@ -1,6 +1,6 @@
 <div class="container-fluid Material">
   <div class="pt-5">
-    <form [formGroup]="materialForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <form [formGroup]="materialForm" (ngSubmit)="onCreateLabelPublishedEdit()" (keydown.enter)="$event.preventDefault()">
 
       <div class="shadow bg-light p-3 outerMaterial">
         <div class="row">
@@ -387,12 +387,17 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
+          <div class="buttonsCreateLabel">
+            <button routerLink="/home" class="btn is-primary form-control cancelButton">
+              <img height="18" src="assets/icons/close.svg">
+              Cancel
+            </button>
+            <div class="saveButtonFlex">
           <button class="btn is-primary form-control saveBtnMat" id="save-btn" type="submit">
             <img height="18" src="assets/icons/content-save.svg">
             Save as
           </button>
-          <select formControlName="status" class="custom-select selectBox m-2">
+          <select formControlName="status" class="custom-select selectBox ml-2">
             <option value="{{ saveStatus.DRAFT }}" default
                     [selected]="material?.getSaveStatus() == saveStatus.DRAFT">Draft
             </option>
@@ -400,8 +405,24 @@
                     [selected]="material?.getSaveStatus() == saveStatus.PUBLISHED">Published
             </option>
           </select>
+            </div>
+          </div>
         </div>
       </div>
     </form>
+  </div>
+</div>
+<div *ngIf="popupPublishEdit" class="popupUser">
+  <div class="userEditPopup">
+    <div style="text-align: center;"><h1>Are you sure to publish this label?</h1></div>
+    <div style="text-align: center; font-size: 18px"><p>After publishing you <u>can't</u> edit this label!</p></div>
+    <div class="popupUserButtons">
+      <button type="button" class="btn btn-primary form-control popupUserBtn" (click)="closePopup()"><img
+        height="18" src="assets/icons/close.svg" alt="Cancel"> Cancel
+      </button>
+      <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onSubmit()"><img
+        height="18" src="assets/icons/content-save-outline.svg" alt="Publish"> Publish
+      </button>
+    </div>
   </div>
 </div>

@@ -31,6 +31,7 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
   public material: Material;
   public overviewImagePreview: string;
   public closeUpImagePreview: string;
+  public popupPublishEdit:boolean = false;
 
   constructor(protected materialService: MaterialsService, protected ingredientService: IngredientService,
               protected router: Router, protected userService: UserService, protected authService: AuthService,
@@ -165,18 +166,28 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
     return this.tags.includes(MaterialTag[tagKey]);
   }
 
-  onSubmit(): void {
-    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
+  public onCreateLabelPublishedEdit() {
+    if (!this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
       this.materialForm.markAllAsTouched();
 
-      // TODO: one method
       this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
         duration: 20000,
-        horizontalPosition: 'center', verticalPosition: 'bottom'
+        horizontalPosition: 'center', verticalPosition: 'bottom',
       });
 
       return;
+    } else if (this.materialForm.get('status').value === SaveStatus.DRAFT) {
+      this.onSubmit();
+    } else if (this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
+      this.popupPublishEdit = true;
     }
+  }
+
+  closePopup(): void {
+    this.popupPublishEdit = false;
+  }
+
+  public onSubmit(): void {
 
     if (this.isDuplicateAction) {
       // Get image from the label that was requested to duplicate
