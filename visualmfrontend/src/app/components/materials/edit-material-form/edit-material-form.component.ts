@@ -165,18 +165,15 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
     return this.tags.includes(MaterialTag[tagKey]);
   }
 
-  onSubmit(): void {
-    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
-      this.materialForm.markAllAsTouched();
+  public onCreateLabelPublishedEdit() {
+    super.onCreateLabelPublished();
+  }
 
-      // TODO: one method
-      this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
-        duration: 20000,
-        horizontalPosition: 'center', verticalPosition: 'bottom'
-      });
+  closePopup(): void {
+    super.closePopup();
+  }
 
-      return;
-    }
+  public onSubmit(): void {
 
     if (this.isDuplicateAction) {
       // Get image from the label that was requested to duplicate

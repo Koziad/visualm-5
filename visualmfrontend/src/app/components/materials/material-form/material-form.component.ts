@@ -18,7 +18,6 @@ import {AuthService} from '../../../services/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppConfigService} from '../../../services/app-config.service';
 
-
 @Component({
   selector: 'app-material-form',
   templateUrl: './material-form.component.html',
@@ -47,6 +46,7 @@ export class MaterialFormComponent implements OnInit {
   public logoPath: string;
   protected parentId: number = null;
   public materials: Material[] = [];
+  public popupPublish:boolean = false;
 
   @ViewChild('overviewImg') overviewFileUpload: FileUploadComponent;
   @ViewChild('closeUpImg') closeUpFileUpload: FileUploadComponent;
@@ -132,18 +132,28 @@ export class MaterialFormComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {
+  public onCreateLabelPublished() {
     if (!this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
       this.materialForm.markAllAsTouched();
 
       this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
         duration: 20000,
-        horizontalPosition: 'center', verticalPosition: 'bottom'
+        horizontalPosition: 'center', verticalPosition: 'bottom',
       });
 
       return;
+    } else if (this.materialForm.get('status').value === SaveStatus.DRAFT) {
+      this.onSubmit();
+    } else if (this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
+      this.popupPublish = true;
     }
+  }
 
+  closePopup(): void {
+    this.popupPublish = false;
+  }
+
+  public onSubmit(): void {
     let changes = "No changes";
     if (this.materialForm.get('changes').value != null) {
       changes = this.materialForm.get('changes').value.trim();
