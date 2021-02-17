@@ -46,6 +46,7 @@ export class MaterialFormComponent implements OnInit {
   public user: User;
   public logoPath: string;
   protected parentId: number = null;
+  public materials: Material[] = [];
 
   @ViewChild('overviewImg') overviewFileUpload: FileUploadComponent;
   @ViewChild('closeUpImg') closeUpFileUpload: FileUploadComponent;
@@ -185,12 +186,35 @@ export class MaterialFormComponent implements OnInit {
     material.setOverviewURL(this.overviewFileUpload.mediaDataURL);
     material.setCloseUpURL(this.closeUpFileUpload.mediaDataURL);
 
-    this.materialService.save(material).subscribe(data => {
-      this.creationFailed = false;
-      this.router.navigate(['/home']);
-    }, error => {
-      console.log(error);
-      this.creationFailed = true;
+    let publishedSequenceNumbers = [];
+    let sequenceNumberPublished = 0;
+
+    this.materialService.getAll().subscribe(materials => {
+      materials.forEach((material) => {
+        const currentMaterial: Material = Material.trueCopy(material);
+
+        // Only display PUBLISHED labels
+        if (currentMaterial.getSaveStatus() === SaveStatus.PUBLISHED) {
+          this.materials.push(currentMaterial);
+        }
+      });
+
+      this.materials.forEach(material => {publishedSequenceNumbers.push(material.getSequenceNumberPublished())});
+
+      sequenceNumberPublished = (Math.max.apply(Math, publishedSequenceNumbers))+1;
+
+      if (!isFinite(sequenceNumberPublished)) {
+        sequenceNumberPublished = 1;
+      }
+      material.setSequenceNumberPublished(sequenceNumberPublished);
+
+      this.materialService.save(material).subscribe(data => {
+        this.creationFailed = false;
+        this.router.navigate(['/home']);
+      }, error => {
+        console.log(error);
+        this.creationFailed = true;
+      });
     });
   }
 

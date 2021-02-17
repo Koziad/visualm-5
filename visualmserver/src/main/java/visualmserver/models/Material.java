@@ -22,6 +22,9 @@ public class Material {
     @Column(name = "sequence_number")
     private Long sequenceNumber;
 
+    @Column(name = "sequence_number_published")
+    private Long sequenceNumberPublished;
+
     @Size(max = 25)
     @NotBlank(message = "Name cannot be empty.")
     private String name;
@@ -90,8 +93,16 @@ public class Material {
         return this.sequenceNumber;
     }
 
+    public Long getSequenceNumberPublished() {
+        return this.sequenceNumberPublished;
+    }
+
     public void setSequenceNumber(Long sequenceNumber) {
         this.sequenceNumber = sequenceNumber;
+    }
+
+    public void setSequenceNumberPublished(Long sequenceNumberPublished) {
+        this.sequenceNumberPublished = sequenceNumberPublished;
     }
 
     public String getName() {
