@@ -132,7 +132,7 @@ export class MaterialFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
+    if (!this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
       this.materialForm.markAllAsTouched();
 
       this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
