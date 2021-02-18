@@ -129,3 +129,10 @@ modules.xml
 
 # VS code
 .vscode/settings.json
+
+## Directories for SLL
+visualmfrontend/ssl/*
+!visualmfrontend/ssl/.gitkeep
+
+visualmserver/src/main/resources/keystore/*
+!visualmserver/src/main/resources/keystore/.gitkeep

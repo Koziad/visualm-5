@@ -44,6 +44,20 @@ export const environment = {
 };
 ```
 
+**SSL:**
+
+To enable SSL for Angular, set the ssl attribute in the `visualmfrontend/angular.json` to `true`. 
+Also add the SSL certifcate and the SSL key in the `visualmfrontend/ssl` directory.
+```json
+"serve": {
+  "builder": "@angular-devkit/build-angular:dev-server",
+  "options": {
+    "browserTarget": "visualm:build",
+    "ssl": true,
+    "sslCert": "ssl/server.crt",
+    "sslKey": "ssl/server.key"
+  }
+```
 
 #### Spring Boot
 **Dependencies:**
@@ -65,7 +79,7 @@ Be sure to change the `spring.jpa.hibernate.ddl-auto` property to `validate` whe
 Use the `update` attribute during the setup or when developing further on the application.
 ```yaml
 # Database settings
-spring.datasource.url=jdbc:mysql://domain:3306/database?useSSL=FALSE&serverTimezone=UTC&allowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://domain:3306/database?Timezone=UTC&autoReconnect=true
 spring.datasource.username=db-username
 spring.datasource.password=db-user-password
 spring.jpa.hibernate.ddl-auto=update
@@ -76,12 +90,31 @@ spring.mail.port=587
 spring.mail.username=server.email@gmail.com
 spring.mail.password=server-email-password
 
+# SMTP SSL
+spring.mail.properties.mail.smtp.socketFactory.port = 465
+spring.mail.properties.mail.smtp.socketFactory.class = javax.net.ssl.SSLSocketFactory
+
 # JWT configuration
 jwt.issuer=msmtools
 jwt.pass-phrase=a secret passphrase for the jwt token
 
 frontend.url=https://url-to-frontend.com
 ```
+
+**SSL:**
+
+To enable SSL for the Spring Boot REST API, configure the following in the `application.properties`:
+```yaml
+# Format used for the keystore. Options: PKCS12 or JKS
+server.ssl.key-store-type=PKCS12 
+# Path to keystore with certificate
+server.ssl.key-store=classpath:keystore/file.p12
+server.ssl.key-store-password=password
+server.ssl.key-alias=alias-used-in-certificate
+
+server.ssl.enabled=true
+```
+Also add the certificate file in the `visualmserver/src/main/resources/keystore/` directory.
 
 **AppConfig Table**
  
