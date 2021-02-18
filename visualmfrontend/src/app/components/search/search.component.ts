@@ -236,10 +236,15 @@ export class SearchComponent implements OnInit {
     let foundMaterials: Map<Material, number> = new Map<Material, number>();
 
     this.allMaterials.forEach((material) => {
-      if (material.getSequenceNumber().toString().includes(searchQuery)) {
-        foundMaterials.set(material, 5);
+      if (!(material.getSequenceNumberPublished() == null)) {
+        if (material.getSequenceNumberPublished().toString().includes(searchQuery)) {
+          foundMaterials.set(material, 5);
+        }
+        if (material.getSequenceNumberPublished().toString() == searchQuery) {
+          foundMaterials.set(material, 10);
+        }
       }
-      if (material.getSequenceNumber().toString() == searchQuery) {
+      if (material.getFormattedSequenceNumber().toString().includes(searchQuery)) {
         foundMaterials.set(material, 10);
       }
     });
@@ -300,7 +305,7 @@ export class SearchComponent implements OnInit {
     //Add materials to CSV
     this.matchingMaterials.forEach(x => {
         csvArray.push(
-          x.getSequenceNumber() + '\t ' +
+          x.getFormattedSequenceNumber() + '\t ' +
           x.getName() + '\t ' +
           x.getChanges() + '\t ' +
           x.getCreationDate() + '\t ' +
