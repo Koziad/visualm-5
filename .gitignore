@@ -129,3 +129,6 @@ modules.xml
 
 # VS code
 .vscode/settings.json
+
+visualmfrontend/ssl/*
+!visualmfrontend/ssl/.gitkeep
