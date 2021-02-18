@@ -42,7 +42,7 @@ h1, h2, h3 {
 }
 
 .sammie {
-  display: none;
+  /*display: none;*/
   width: 1050px;
   height: 1485px;
 }
@@ -93,35 +93,50 @@ hr {
 
 .name {
   letter-spacing: 4px;
-  font-size: 25pt;
+  font-size: 27pt;
 }
 
 .nameTitle {
   letter-spacing: 4px;
-  font-size: 25pt;
+  font-size: 27pt;
   width: 500px;
   margin-left: -42.5%;
 }
 
 .type {
   letter-spacing: 4px;
-  font-size: 15pt;
+  font-size: 18pt;
 }
 
 .Snumber {
-  font-size: 12pt;
+  font-size: 15pt;
 }
 
 .tag {
-  font-size: 10pt;
+  font-size: 13pt;
 }
 
 .title {
-  font-size: 17pt;
+  font-size: 20pt;
 }
 
 .info {
-  font-size: 12pt;
+  font-size: 17pt;
+}
+
+.changesTekst {
+  letter-spacing: 4px;
+}
+
+.ingredient {
+  margin-left: -8%;
+  padding-left: 5px;
+}
+
+
+.procedure {
+  margin-left: -8%;
+  padding-left: 5px;
 }
 
 .selectBox {
@@ -163,15 +178,40 @@ hr {
 }
 
 .marker {
-  position: relative;
-  margin-top: -12.5%;
   width: 80%;
 }
 
 .maker {
-  margin-top: -1%;
+  font-size: 13pt;
 }
 
 .MaterialPDF {
   font-family: "Calibri Light", "Roboto Light", sans-serif;
 }
+
+.ratio {
+  margin-top: 3%;
+  margin-left: -3%;
+}
+
+.ratioPDF {
+  font-size: 15pt;
+  width: 800px;
+  margin-left: 10%;
+}
+
+.makerr {
+  margin-top: -20%;
+}
+
+/*.changes {*/
+/*  margin-top: -10%;*/
+/*  width: 450px;*/
+/*}*/
+
+.tags-container2 {
+  width: 500px;
+  margin-left: -40%;
+}
+
+

@@ -79,7 +79,7 @@ export class MaterialFormComponent implements OnInit {
       'url': new FormControl(null, this.validURL.bind(this)),
       'step': new FormControl(null, this.emptySteps.bind(this)),
       'changes': new FormControl(null, [Validators.required, Validators.pattern(whitespaceCheck),
-        Validators.maxLength(200)]),
+        Validators.maxLength(100)]),
       'sequenceNumber': new FormControl(null),
       'variationOn': new FormControl(false),
       'referenceAuthor': new FormControl(null, [Validators.required, Validators.pattern(whitespaceCheck)]),

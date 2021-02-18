@@ -190,10 +190,10 @@
               <div class="col-md-12 mt-2 col-lg-6">
                 <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step"
                        (keydown.enter)="addStep()"
-                       maxlength="50" [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
+                       maxlength="40" [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
 			                 'is-valid': materialForm.get('step').valid && materialForm.get('step').touched}"/>
                 <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}
-                  /50]</span>
+                  /40]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
                 <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()"
@@ -315,12 +315,12 @@
 
             <div class="form-group">
               <textarea class="form-control textareaBox" cols="30" rows="10"
-                        formControlName="changes" maxlength="200"
+                        formControlName="changes" maxlength="100"
                         [ngClass]="{'is-invalid': !materialForm.get('changes').valid && materialForm.get('changes').touched,
                          'is-valid': materialForm.get('changes').valid && materialForm.get('changes').touched}"
                         placeholder="Describe your changes">
               </textarea>
-              <span *ngIf="materialForm.get('changes').value">[{{materialForm.get('changes').value.length}}/200]</span>
+              <span *ngIf="materialForm.get('changes').value">[{{materialForm.get('changes').value.length}}/100]</span>
               <small class="help-block smallTextError"
                      *ngIf="!materialForm.get('changes').valid && materialForm.get('changes').touched">
                 &bull; Please describe the changes you have made.

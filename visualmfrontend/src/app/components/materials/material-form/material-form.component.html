@@ -191,10 +191,10 @@
 
             <div class="form-row">
               <div class="col-md-12 mt-2 col-lg-6">
-                <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step" maxlength="50"
+                <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step" maxlength="40"
                        [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
 			                  'is-valid': materialForm.get('step').valid && materialForm.get('step').touched}" (keydown.enter)="addStep()"/>
-                <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/50]</span>
+                <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/40]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
                 <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()" id="add-step-btn"
@@ -314,12 +314,12 @@
             </p>
 
             <div class="form-group">
-              <textarea class="form-control textareaBox" cols="30" rows="10" maxlength="200"
+              <textarea class="form-control textareaBox" cols="30" rows="10" maxlength="100"
                         formControlName="changes"
                         [ngClass]="{'is-invalid': !materialForm.get('changes').valid && materialForm.get('changes').touched,
                           'is-valid': materialForm.get('changes').valid && materialForm.get('changes').touched}"
                         placeholder="Describe your changes"></textarea>
-              <span *ngIf="materialForm.get('changes').value" class="ml-2">[{{materialForm.get('changes').value.length}}/200]</span>
+              <span *ngIf="materialForm.get('changes').value" class="ml-2">[{{materialForm.get('changes').value.length}}/100]</span>
               <small class="help-block smallTextError"
                      *ngIf="!materialForm.get('changes').valid && materialForm.get('changes').touched">
                 &bull; Please describe the changes you have made.
