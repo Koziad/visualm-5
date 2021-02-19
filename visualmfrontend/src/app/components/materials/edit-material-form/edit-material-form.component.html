@@ -137,7 +137,7 @@
 
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="amount" type="number"
-                       placeholder="Grams" (keydown.enter)="addIngredient()" maxlength="4"
+                       placeholder="Grams" (keydown.enter)="addIngredient()"
                        [ngClass]="{'is-invalid': !materialForm.get('amount').valid && materialForm.get('amount').touched,
 			                  'is-valid': materialForm.get('amount').valid && materialForm.get('amount').touched}"/>
               </div>
