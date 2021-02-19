@@ -236,8 +236,9 @@
 
           <hr/>
 
-          <div class="row mt-4">
-            <div class="col-md-6">
+          <div class="pdfInfo">
+          <div class="stepsIngredients">
+            <div class="IngredientsDiv">
               <h1 class="title">INGREDIENTS:</h1>
               <div class="ingredient-container mt-3">
                 <ul>
@@ -246,9 +247,26 @@
                   </li>
                 </ul>
               </div>
+
+
+              <div class="changes">
+                <h1 class="title">REFERENCES & CHANGES: </h1>
+                <p class="info" *ngIf="material?.getParentId()">
+                  {{parentMaterial?.getName() }} by {{ parentAuthor?.getFirstname() + " " + parentAuthor?.getLastname() }}
+                </p>
+                <div class="row">
+                  <p class="info changeWho" *ngIf="!material?.getParentId()">
+                    {{ material?.getReference() }}
+                  </p>
+
+                  <p class="info word-break changesTekst">
+                    Changes made: {{material?.getChanges() }}
+                  </p>
+                </div>
+              </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="ProcedureDiv">
               <h1 class="title">MAKING PROCEDURE:</h1>
               <div class="procedure-container mt-2">
                 <ul>
@@ -262,32 +280,13 @@
 
           </div>
 
-          <div class="row">
-            <div class="col-md-6 changes">
-              <h1 class="title">REFERENCES & CHANGES: </h1>
-              <p class="info" *ngIf="material?.getParentId()">
-                {{parentMaterial?.getName() }} by {{ parentAuthor?.getFirstname() + " " + parentAuthor?.getLastname() }}
-              </p>
-
-              <p class="info" *ngIf="!material?.getParentId()">
-                {{ material?.getReference() }}
-              </p>
-
-              <p class="info word-break changesTekst">
-                Changes made: {{material?.getChanges() }}
-              </p>
-            </div>
-          </div>
-
+        </div>
         </div>
 
       </div>
       <div class="row">
         <div class="col-md-12 text-center makerr">
-          <p class="ratioPDF">
-            {{ ratio }}
-          </p>
-          <hr class="marker"/>
+          <hr class="marker markerBottom"/>
           <p class="maker">Maker: {{ user?.getFirstname() + " " + user?.getLastname()}}
             - {{material?.getCreationDate() | date:'dd-MM-yyyy'}} - {{ user?.getEmail() }}</p>
         </div>

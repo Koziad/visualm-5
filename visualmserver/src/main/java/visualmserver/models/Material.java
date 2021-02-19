@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "material")
 public class Material {
-    public static final int MAXIMUM_STEPS = 8;
+    public static final int MAXIMUM_STEPS = 10;
     public static final int MAXIMUM_INGREDIENTS = 6;
 
     @NotNull

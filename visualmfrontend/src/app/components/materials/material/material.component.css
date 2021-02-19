@@ -42,7 +42,8 @@ h1, h2, h3 {
 }
 
 .sammie {
-  /*display: none;*/
+  display: none;
+  margin-top: 20%;
   width: 1050px;
   height: 1485px;
 }
@@ -124,10 +125,6 @@ hr {
   font-size: 17pt;
 }
 
-.changesTekst {
-  letter-spacing: 4px;
-}
-
 .ingredient {
   margin-left: -8%;
   padding-left: 5px;
@@ -201,17 +198,41 @@ hr {
 }
 
 .makerr {
-  margin-top: -20%;
+  margin-top: -12%;
 }
-
-/*.changes {*/
-/*  margin-top: -10%;*/
-/*  width: 450px;*/
-/*}*/
 
 .tags-container2 {
   width: 500px;
   margin-left: -40%;
 }
 
+.changesTekst {
+  letter-spacing: 4px;
+  margin-left: 4%;
+}
 
+.changes {
+  margin: 0;
+  width: auto;
+  max-width: 400px;
+  position: absolute;
+}
+.stepsIngredients {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  position: relative;
+}
+.IngredientsDiv {
+  margin-right: 5px;
+}
+.ProcedureDiv {
+  margin-left: 5px;
+}
+.markerBottom {
+  margin: 0 auto;
+}
+.changeWho {
+  margin-left: 4%;
+}

@@ -123,21 +123,21 @@
             <div class="form-row mt-2">
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="ingredient" type="text" value=""
-                       placeholder="Name" maxlength="30"
+                       placeholder="Name" maxlength="15"
                        [ngClass]="{'is-invalid': !materialForm.get('ingredient').valid && materialForm.get('ingredient').touched,
 			                  'is-valid': materialForm.get('ingredient').valid && materialForm.get('ingredient').touched}"/>
               </div>
 
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="ingredientType" type="text" value=""
-                       placeholder="Type" maxlength="30"
+                       placeholder="Type" maxlength="15"
                        [ngClass]="{'is-invalid': !materialForm.get('ingredientType').valid && materialForm.get('ingredientType').touched,
                        'is-valid': materialForm.get('ingredientType').valid && materialForm.get('ingredientType').touched}"/>
               </div>
 
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="amount" type="number"
-                       placeholder="Grams" (keydown.enter)="addIngredient()"
+                       placeholder="Grams" (keydown.enter)="addIngredient()" maxlength="4"
                        [ngClass]="{'is-invalid': !materialForm.get('amount').valid && materialForm.get('amount').touched,
 			                  'is-valid': materialForm.get('amount').valid && materialForm.get('amount').touched}"/>
               </div>
