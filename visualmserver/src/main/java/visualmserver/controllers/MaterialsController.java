@@ -134,6 +134,10 @@ public class MaterialsController {
 
         Material foundMaterial = materialsRepository.getMaterialBySequenceNumber(sequenceNumber);
 
+        if (foundMaterial == null) {
+            throw new ResourceNotFoundException(String.format("Material not found with sequenceNumber=%d", sequenceNumber));
+        }
+
         if (material.getOverviewURL() != null) {
             String savedImgPath = FileUploadHandler.upload(material.getOverviewURL(), String.format("/images/material/%s/", material.getUser().getId()));
             material.setOverviewURL(savedImgPath);
