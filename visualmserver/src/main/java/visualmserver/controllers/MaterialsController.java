@@ -113,7 +113,7 @@ public class MaterialsController {
             material.setCloseUpURL(savedImgPath);
         }
 
-        Material savedMaterial = this.insertMaterial(material);
+        Material savedMaterial = this.insertMaterial(material, null);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{sequenceNumber}").buildAndExpand(savedMaterial.getSequenceNumber()).toUri();
 
         return ResponseEntity.created(uri).body(savedMaterial);
@@ -148,20 +148,21 @@ public class MaterialsController {
             material.setCloseUpURL(foundMaterial.getCloseUpURL());
         }
 
-        Material savedMaterial = this.insertMaterial(material);
+        Material savedMaterial = this.insertMaterial(material, foundMaterial);
         return ResponseEntity.ok().body(savedMaterial);
     }
 
-    private Material insertMaterial(Material material) {
+    private Material insertMaterial(Material material, Material existingMaterial) {
         Material savedMaterial = this.materialsRepository.save(material);
+
+        if (existingMaterial != null) {
+            this.materialIngredientRepository.deleteMaterialIngredientBySequenceNumber(existingMaterial.getSequenceNumber());
+        }
 
         for (MaterialIngredient materialIngredient : material.getMaterialIngredients()) {
             // Add ingredient if not added yet
             if (materialIngredient.getIngredient().getId() == 0)
                 this.ingredientRepository.save(materialIngredient.getIngredient());
-
-            this.materialIngredientRepository.deleteMaterialIngredientByIds(savedMaterial.getSequenceNumber(),
-                    materialIngredient.getIngredient().getId());
 
             this.materialIngredientRepository.insertMaterialIngredient(savedMaterial.getSequenceNumber(),
                     materialIngredient.getIngredient().getId(), materialIngredient.getAmount());

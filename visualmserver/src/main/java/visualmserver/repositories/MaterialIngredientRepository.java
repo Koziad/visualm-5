@@ -14,8 +14,8 @@ import javax.transaction.Transactional;
 public interface MaterialIngredientRepository extends JpaRepository<MaterialIngredient, MaterialIngredientKey> {
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM material_has_ingredient WHERE sequence_number = ?1 AND id = ?2", nativeQuery = true)
-    void deleteMaterialIngredientByIds(Long sequenceNumber, int id);
+    @Query(value = "DELETE FROM material_has_ingredient WHERE sequence_number = ?1", nativeQuery = true)
+    void deleteMaterialIngredientBySequenceNumber(Long sequenceNumber);
 
     @Transactional
     @Modifying
