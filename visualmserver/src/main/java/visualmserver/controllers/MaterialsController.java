@@ -113,7 +113,7 @@ public class MaterialsController {
             material.setCloseUpURL(savedImgPath);
         }
 
-        Material savedMaterial = this.insertMaterial(material);
+        Material savedMaterial = this.insertMaterial(material, null);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{sequenceNumber}").buildAndExpand(savedMaterial.getSequenceNumber()).toUri();
 
         return ResponseEntity.created(uri).body(savedMaterial);
@@ -134,6 +134,10 @@ public class MaterialsController {
 
         Material foundMaterial = materialsRepository.getMaterialBySequenceNumber(sequenceNumber);
 
+        if (foundMaterial == null) {
+            throw new ResourceNotFoundException(String.format("Material not found with sequenceNumber=%d", sequenceNumber));
+        }
+
         if (material.getOverviewURL() != null) {
             String savedImgPath = FileUploadHandler.upload(material.getOverviewURL(), String.format("/images/material/%s/", material.getUser().getId()));
             material.setOverviewURL(savedImgPath);
@@ -148,20 +152,21 @@ public class MaterialsController {
             material.setCloseUpURL(foundMaterial.getCloseUpURL());
         }
 
-        Material savedMaterial = this.insertMaterial(material);
+        Material savedMaterial = this.insertMaterial(material, foundMaterial);
         return ResponseEntity.ok().body(savedMaterial);
     }
 
-    private Material insertMaterial(Material material) {
+    private Material insertMaterial(Material material, Material existingMaterial) {
         Material savedMaterial = this.materialsRepository.save(material);
+
+        if (existingMaterial != null) {
+            this.materialIngredientRepository.deleteMaterialIngredientBySequenceNumber(existingMaterial.getSequenceNumber());
+        }
 
         for (MaterialIngredient materialIngredient : material.getMaterialIngredients()) {
             // Add ingredient if not added yet
             if (materialIngredient.getIngredient().getId() == 0)
                 this.ingredientRepository.save(materialIngredient.getIngredient());
-
-            this.materialIngredientRepository.deleteMaterialIngredientByIds(savedMaterial.getSequenceNumber(),
-                    materialIngredient.getIngredient().getId());
 
             this.materialIngredientRepository.insertMaterialIngredient(savedMaterial.getSequenceNumber(),
                     materialIngredient.getIngredient().getId(), materialIngredient.getAmount());
