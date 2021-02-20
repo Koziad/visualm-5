@@ -51,13 +51,20 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
       if (params.sequence_number) {
         this.materialService.getBySequenceNumber(params.sequence_number).pipe(share()).subscribe(material => {
           this.material = Material.trueCopy(material);
-          this.user = User.trueCopy(this.material.getUser());
 
           // Not allowed to edit published labels. Duplicate published/draft labels are allowed
           if (this.material.getSaveStatus() === SaveStatus.PUBLISHED && !this.isDuplicateAction) {
             if (!this.authService.isAdmin()) {
               this.router.navigate(['/not-found']);
             }
+          }
+
+          this.user = User.trueCopy(this.material.getUser());
+
+          if (this.isDuplicateAction) {
+            this.userService.getUserProfile(this.authService.currentUser.getId()).subscribe(user => {
+              this.user = User.trueCopy(user);
+            });
           }
 
           // Convert json response to correct typescript model
@@ -150,10 +157,6 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
     this.materialForm.get('ingredient').updateValueAndValidity();
     this.materialForm.get('changes').updateValueAndValidity();
     this.materialForm.get('status').updateValueAndValidity();
-  }
-
-  onCancel(): void {
-    // this._location.back();
   }
 
   ngOnDestroy(): void {
