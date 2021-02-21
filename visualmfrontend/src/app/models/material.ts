@@ -5,7 +5,7 @@ import {Tag} from './tag';
 import {User} from './user';
 
 export class Material {
-  public static readonly MAXIMUM_STEPS = 8;
+  public static readonly MAXIMUM_STEPS = 10;
   public static readonly MAXIMUM_INGREDIENTS = 6;
   private static FORMAT = '00000';
   private sequenceNumber: number;
