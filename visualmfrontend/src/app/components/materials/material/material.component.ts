@@ -62,6 +62,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
       if (params.sequence_number) {
         this.materialService.getBySequenceNumber(params.sequence_number).subscribe(material => {
           this.material = Material.trueCopy(material);
+          this.user = User.trueCopy(this.material.getUser());
 
           if (material) {
             this.loadingDone = true;
@@ -72,8 +73,14 @@ export class MaterialComponent implements OnInit, OnDestroy {
             this.canEdit = false;
           }
 
+          if (this.material.getSaveStatus() === SaveStatus.DRAFT
+            && this.authService.currentUser.getId() != this.user.getId()) {
+            if (!this.authService.isAdmin()) {
+              this.router.navigate(['/not-found']);
+            }
+          }
+
           this.steps = this.material.getSteps().split('|');
-          this.user = Object.assign(new User(), this.material.getUser());
 
           // Be sure to check this only when a user is logged in
           if (this.authService.isLoggedIn()) {
