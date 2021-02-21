@@ -51,13 +51,20 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
       if (params.sequence_number) {
         this.materialService.getBySequenceNumber(params.sequence_number).pipe(share()).subscribe(material => {
           this.material = Material.trueCopy(material);
-          this.user = User.trueCopy(this.material.getUser());
 
           // Not allowed to edit published labels. Duplicate published/draft labels are allowed
           if (this.material.getSaveStatus() === SaveStatus.PUBLISHED && !this.isDuplicateAction) {
             if (!this.authService.isAdmin()) {
               this.router.navigate(['/not-found']);
             }
+          }
+
+          this.user = User.trueCopy(this.material.getUser());
+
+          if (this.isDuplicateAction) {
+            this.userService.getUserProfile(this.authService.currentUser.getId()).subscribe(user => {
+              this.user = User.trueCopy(user);
+            });
           }
 
           // Convert json response to correct typescript model
@@ -152,10 +159,6 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
     this.materialForm.get('status').updateValueAndValidity();
   }
 
-  onCancel(): void {
-    // this._location.back();
-  }
-
   ngOnDestroy(): void {
     this.routeSubscription.unsubscribe();
     this.queryParamsSubscription.unsubscribe();
@@ -165,18 +168,15 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
     return this.tags.includes(MaterialTag[tagKey]);
   }
 
-  onSubmit(): void {
-    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
-      this.materialForm.markAllAsTouched();
+  public onCreateLabelPublishedEdit() {
+    super.onCreateLabelPublished();
+  }
 
-      // TODO: one method
-      this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
-        duration: 20000,
-        horizontalPosition: 'center', verticalPosition: 'bottom'
-      });
+  closePopup(): void {
+    super.closePopup();
+  }
 
-      return;
-    }
+  public onSubmit(): void {
 
     if (this.isDuplicateAction) {
       // Get image from the label that was requested to duplicate

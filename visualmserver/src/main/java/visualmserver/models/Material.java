@@ -13,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "material")
 public class Material {
-    public static final int MAXIMUM_STEPS = 8;
+    public static final int MAXIMUM_STEPS = 10;
     public static final int MAXIMUM_INGREDIENTS = 6;
 
     @NotNull
@@ -21,6 +21,9 @@ public class Material {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "sequence_number")
     private Long sequenceNumber;
+
+    @Column(name = "sequence_number_published")
+    private Long sequenceNumberPublished;
 
     @Size(max = 25)
     @NotBlank(message = "Name cannot be empty.")
@@ -90,8 +93,16 @@ public class Material {
         return this.sequenceNumber;
     }
 
+    public Long getSequenceNumberPublished() {
+        return this.sequenceNumberPublished;
+    }
+
     public void setSequenceNumber(Long sequenceNumber) {
         this.sequenceNumber = sequenceNumber;
+    }
+
+    public void setSequenceNumberPublished(Long sequenceNumberPublished) {
+        this.sequenceNumberPublished = sequenceNumberPublished;
     }
 
     public String getName() {

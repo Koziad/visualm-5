@@ -5,10 +5,11 @@ import {Tag} from './tag';
 import {User} from './user';
 
 export class Material {
-  public static readonly MAXIMUM_STEPS = 8;
+  public static readonly MAXIMUM_STEPS = 10;
   public static readonly MAXIMUM_INGREDIENTS = 6;
   private static FORMAT = '00000';
   private sequenceNumber: number;
+  private sequenceNumberPublished: number;
   private name: string;
   private creationDate: Date;
   private changes: string;
@@ -47,7 +48,15 @@ export class Material {
   }
 
   public getFormattedSequenceNumber(): string {
-    return Material.FORMAT.substring(0, Material.FORMAT.length - this.getSequenceNumber().toString().length) + this.getSequenceNumber().toString();
+    if (this.sequenceNumberPublished == null) {
+      return "OLD" + this.sequenceNumber;
+    } else {
+      return Material.FORMAT.substring(0, Material.FORMAT.length - this.getSequenceNumberPublished().toString().length) + this.getSequenceNumberPublished().toString();
+    }
+  }
+
+  public getSequenceNumberPublished(): number {
+    return this.sequenceNumberPublished;
   }
 
   public getName(): string {
@@ -110,6 +119,10 @@ export class Material {
     this.materialIngredients = materialIngredients;
   }
 
+  public setSequenceNumberPublished(sequenceNumberPublished: number): void {
+    this.sequenceNumberPublished = sequenceNumberPublished;
+  }
+
   public getChanges(): string {
     return this.changes;
   }
@@ -121,6 +134,7 @@ export class Material {
   public getParentId(): number {
     return this.parentId;
   }
+
 
   public setParentId(parentId: number): void {
     this.parentId = parentId;

@@ -1,6 +1,6 @@
 <div class="container-fluid Material">
   <div class="pt-5">
-    <form [formGroup]="materialForm" (ngSubmit)="onSubmit()" (keydown.enter)="$event.preventDefault()">
+    <form [formGroup]="materialForm" (ngSubmit)="onCreateLabelPublishedEdit()" (keydown.enter)="$event.preventDefault()">
 
       <div class="shadow bg-light p-3 outerMaterial">
         <div class="row">
@@ -53,11 +53,11 @@
           <div class="col-md-4 text-center">
             <h1 class="h1 text-uppercase">{{ materialForm.get('title').value }}</h1>
             <input class="form-control rounded-pill" type="text" placeholder="Title" formControlName="title"
-                   maxlength="25"
+                   maxlength="20"
                    [ngClass]="{'is-invalid': !materialForm.get('title').valid && materialForm.get('title').touched,
 			              'is-valid': materialForm.get('title').valid && materialForm.get('title').touched}"/>
             <span *ngIf="materialForm.get('title').value" class="mt-1">[{{materialForm.get('title').value.length}}
-              /25]</span>
+              /20]</span>
             <span class="help-block smallTextError"
                   *ngIf="!materialForm.get('title').valid && materialForm.get('title').touched">&bull;
 	      Please enter a title.
@@ -123,14 +123,14 @@
             <div class="form-row mt-2">
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="ingredient" type="text" value=""
-                       placeholder="Name" maxlength="30"
+                       placeholder="Name" maxlength="15"
                        [ngClass]="{'is-invalid': !materialForm.get('ingredient').valid && materialForm.get('ingredient').touched,
 			                  'is-valid': materialForm.get('ingredient').valid && materialForm.get('ingredient').touched}"/>
               </div>
 
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="ingredientType" type="text" value=""
-                       placeholder="Type" maxlength="30"
+                       placeholder="Type" maxlength="15"
                        [ngClass]="{'is-invalid': !materialForm.get('ingredientType').valid && materialForm.get('ingredientType').touched,
                        'is-valid': materialForm.get('ingredientType').valid && materialForm.get('ingredientType').touched}"/>
               </div>
@@ -190,10 +190,10 @@
               <div class="col-md-12 mt-2 col-lg-6">
                 <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step"
                        (keydown.enter)="addStep()"
-                       maxlength="50" [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
+                       maxlength="40" [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
 			                 'is-valid': materialForm.get('step').valid && materialForm.get('step').touched}"/>
                 <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}
-                  /50]</span>
+                  /40]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
                 <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()"
@@ -315,12 +315,12 @@
 
             <div class="form-group">
               <textarea class="form-control textareaBox" cols="30" rows="10"
-                        formControlName="changes" maxlength="200"
+                        formControlName="changes" maxlength="100"
                         [ngClass]="{'is-invalid': !materialForm.get('changes').valid && materialForm.get('changes').touched,
                          'is-valid': materialForm.get('changes').valid && materialForm.get('changes').touched}"
                         placeholder="Describe your changes">
               </textarea>
-              <span *ngIf="materialForm.get('changes').value">[{{materialForm.get('changes').value.length}}/200]</span>
+              <span *ngIf="materialForm.get('changes').value">[{{materialForm.get('changes').value.length}}/100]</span>
               <small class="help-block smallTextError"
                      *ngIf="!materialForm.get('changes').valid && materialForm.get('changes').touched">
                 &bull; Please describe the changes you have made.
@@ -387,12 +387,17 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
+          <div class="buttonsCreateLabel">
+            <button routerLink="/home" class="btn is-primary form-control cancelButton">
+              <img height="18" src="assets/icons/close.svg">
+              Cancel
+            </button>
+            <div class="saveButtonFlex">
           <button class="btn is-primary form-control saveBtnMat" id="save-btn" type="submit">
             <img height="18" src="assets/icons/content-save.svg">
             Save as
           </button>
-          <select formControlName="status" class="custom-select selectBox m-2">
+          <select formControlName="status" class="custom-select selectBox ml-2">
             <option value="{{ saveStatus.DRAFT }}" default
                     [selected]="material?.getSaveStatus() == saveStatus.DRAFT">Draft
             </option>
@@ -400,8 +405,24 @@
                     [selected]="material?.getSaveStatus() == saveStatus.PUBLISHED">Published
             </option>
           </select>
+            </div>
+          </div>
         </div>
       </div>
     </form>
+  </div>
+</div>
+<div *ngIf="popupPublish" class="popupUser">
+  <div class="userEditPopup">
+    <div style="text-align: center;"><h1>Are you sure to publish this label?</h1></div>
+    <div style="text-align: center; font-size: 18px"><p>After publishing you <u>can't</u> edit this label!</p></div>
+    <div class="popupUserButtons">
+      <button type="button" class="btn btn-primary form-control popupUserBtn" (click)="closePopup()"><img
+        height="18" src="assets/icons/close.svg" alt="Cancel"> Cancel
+      </button>
+      <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onSubmit()"><img
+        height="18" src="assets/icons/content-save-outline.svg" alt="Publish"> Publish
+      </button>
+    </div>
   </div>
 </div>

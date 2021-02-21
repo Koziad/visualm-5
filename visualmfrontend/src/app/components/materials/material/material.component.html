@@ -94,9 +94,6 @@
                 {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
               </li>
             </ul>
-            <p class="info" style="display: inline-block">
-              {{ ratio }}
-            </p>
           </div>
         </div>
 
@@ -129,6 +126,12 @@
             Changes made: {{material?.getChanges() }}
           </p>
         </div>
+      </div>
+
+      <div class="text-center">
+        <p class="info ratio" style="display: inline-block">
+          {{ ratio }}
+        </p>
       </div>
 
       <hr/>
@@ -219,9 +222,9 @@
               <h3 class="Snumber">
                 #{{ material?.getFormattedSequenceNumber() }}</h3>
 
-              <div class="tags-container">
+              <div class="tags-container2 ">
             <span class="tag ml-1" *ngFor="let tag of material?.getTags()">
-              {{ materialTag[tag.name] }}
+             | {{ materialTag[tag.name] }}
             </span>
               </div>
             </div>
@@ -233,26 +236,41 @@
 
           <hr/>
 
-          <div class="row mt-4">
-            <div class="col-md-6">
+          <div class="pdfInfo">
+          <div class="stepsIngredients">
+            <div class="IngredientsDiv">
               <h1 class="title">INGREDIENTS:</h1>
               <div class="ingredient-container mt-3">
                 <ul>
-                  <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1 info">
+                  <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1 info ingredient">
                     {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
                   </li>
                 </ul>
-                <p class="info" style="display: inline-block">
-                  {{ ratio }}
+              </div>
+
+
+              <div class="changes">
+                <h1 class="title">REFERENCES & CHANGES: </h1>
+                <p class="info" *ngIf="material?.getParentId()">
+                  {{parentMaterial?.getName() }} by {{ parentAuthor?.getFirstname() + " " + parentAuthor?.getLastname() }}
                 </p>
+                <div class="row">
+                  <p class="info changeWho" *ngIf="!material?.getParentId()">
+                    {{ material?.getReference() }}
+                  </p>
+
+                  <p class="info word-break changesTekst">
+                    Changes made: {{material?.getChanges() }}
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="ProcedureDiv">
               <h1 class="title">MAKING PROCEDURE:</h1>
               <div class="procedure-container mt-2">
                 <ul>
-                  <li *ngFor="let stepItem of steps" class="mb-1 info">
+                  <li *ngFor="let stepItem of steps" class="mb-1 info procedure word-break">
                     {{ stepItem }}
                   </li>
                 </ul>
@@ -262,30 +280,13 @@
 
           </div>
 
-          <div class="row mt-4">
-            <div class="col-md-6">
-              <h1 class="title">REFERENCES & CHANGES: </h1>
-              <p class="info" *ngIf="material?.getParentId()">
-                {{parentMaterial?.getName() }} by {{ parentAuthor?.getFirstname() + " " + parentAuthor?.getLastname() }}
-              </p>
-
-              <p class="info" *ngIf="!material?.getParentId()">
-                {{ material?.getReference() }}
-              </p>
-
-              <p class="info word-break">
-                Changes made: {{material?.getChanges() }}
-              </p>
-            </div>
-          </div>
-
-
+        </div>
         </div>
 
       </div>
       <div class="row">
-        <div class="col-md-12 text-center">
-          <hr class="marker"/>
+        <div class="col-md-12 text-center makerr">
+          <hr class="marker markerBottom"/>
           <p class="maker">Maker: {{ user?.getFirstname() + " " + user?.getLastname()}}
             - {{material?.getCreationDate() | date:'dd-MM-yyyy'}} - {{ user?.getEmail() }}</p>
         </div>

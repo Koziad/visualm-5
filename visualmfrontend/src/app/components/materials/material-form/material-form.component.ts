@@ -18,7 +18,6 @@ import {AuthService} from '../../../services/auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AppConfigService} from '../../../services/app-config.service';
 
-
 @Component({
   selector: 'app-material-form',
   templateUrl: './material-form.component.html',
@@ -46,6 +45,8 @@ export class MaterialFormComponent implements OnInit {
   public user: User;
   public logoPath: string;
   protected parentId: number = null;
+  public materials: Material[] = [];
+  public popupPublish:boolean = false;
 
   @ViewChild('overviewImg') overviewFileUpload: FileUploadComponent;
   @ViewChild('closeUpImg') closeUpFileUpload: FileUploadComponent;
@@ -74,12 +75,12 @@ export class MaterialFormComponent implements OnInit {
     const whitespaceCheck: RegExp = new RegExp('\\S');
 
     this.materialForm = new FormGroup({
-      'title': new FormControl(null, [Validators.required, Validators.maxLength(25),
+      'title': new FormControl(null, [Validators.required, Validators.maxLength(20),
         Validators.pattern(whitespaceCheck)]),
       'url': new FormControl(null, this.validURL.bind(this)),
       'step': new FormControl(null, this.emptySteps.bind(this)),
       'changes': new FormControl(null, [Validators.required, Validators.pattern(whitespaceCheck),
-        Validators.maxLength(200)]),
+        Validators.maxLength(100)]),
       'sequenceNumber': new FormControl(null),
       'variationOn': new FormControl(false),
       'referenceAuthor': new FormControl(null, [Validators.required, Validators.pattern(whitespaceCheck)]),
@@ -131,18 +132,28 @@ export class MaterialFormComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {
-    if (!this.materialForm.valid && this.materialForm.get('status').value === 'Published') {
+  public onCreateLabelPublished() {
+    if (!this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
       this.materialForm.markAllAsTouched();
 
       this.snackBar.open('Oops something went wrong :( Check all the fields for errors ', 'Close', {
         duration: 20000,
-        horizontalPosition: 'center', verticalPosition: 'bottom'
+        horizontalPosition: 'center', verticalPosition: 'bottom',
       });
 
       return;
+    } else if (this.materialForm.get('status').value === SaveStatus.DRAFT) {
+      this.onSubmit();
+    } else if (this.materialForm.valid && this.materialForm.get('status').value === SaveStatus.PUBLISHED) {
+      this.popupPublish = true;
     }
+  }
 
+  closePopup(): void {
+    this.popupPublish = false;
+  }
+
+  public onSubmit(): void {
     let changes = "No changes";
     if (this.materialForm.get('changes').value != null) {
       changes = this.materialForm.get('changes').value.trim();
@@ -185,12 +196,35 @@ export class MaterialFormComponent implements OnInit {
     material.setOverviewURL(this.overviewFileUpload.mediaDataURL);
     material.setCloseUpURL(this.closeUpFileUpload.mediaDataURL);
 
-    this.materialService.save(material).subscribe(data => {
-      this.creationFailed = false;
-      this.router.navigate(['/home']);
-    }, error => {
-      console.log(error);
-      this.creationFailed = true;
+    let publishedSequenceNumbers = [];
+    let sequenceNumberPublished = 0;
+
+    this.materialService.getAll().subscribe(materials => {
+      materials.forEach((material) => {
+        const currentMaterial: Material = Material.trueCopy(material);
+
+        // Only display PUBLISHED labels
+        if (currentMaterial.getSaveStatus() === SaveStatus.PUBLISHED) {
+          this.materials.push(currentMaterial);
+        }
+      });
+
+      this.materials.forEach(material => {publishedSequenceNumbers.push(material.getSequenceNumberPublished())});
+
+      sequenceNumberPublished = (Math.max.apply(Math, publishedSequenceNumbers))+1;
+
+      if (!isFinite(sequenceNumberPublished)) {
+        sequenceNumberPublished = 1;
+      }
+      material.setSequenceNumberPublished(sequenceNumberPublished);
+
+      this.materialService.save(material).subscribe(data => {
+        this.creationFailed = false;
+        this.router.navigate(['/home']);
+      }, error => {
+        console.log(error);
+        this.creationFailed = true;
+      });
     });
   }
 
