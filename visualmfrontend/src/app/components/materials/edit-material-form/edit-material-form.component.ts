@@ -234,10 +234,35 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
     material.setOverviewURL(this.overviewFileUpload.mediaDataURL ? this.overviewFileUpload.mediaDataURL : null);
     material.setCloseUpURL(this.closeUpFileUpload.mediaDataURL ? this.closeUpFileUpload.mediaDataURL : null);
 
-    this.materialService.update(material.getSequenceNumber(), material).subscribe(data => {
-      this.router.navigate(['material', this.material.getSequenceNumber()]);
-    }, error => {
-      this.creationFailed = true;
+    let publishedSequenceNumbers = [];
+    let sequenceNumberPublished = 0;
+
+    this.materialService.getAll().subscribe(materials => {
+      materials.forEach((material) => {
+        const currentMaterial: Material = Material.trueCopy(material);
+
+        // Only display PUBLISHED labels
+        if (currentMaterial.getSaveStatus() === SaveStatus.PUBLISHED) {
+          this.materials.push(currentMaterial);
+        }
+      });
+
+      this.materials.forEach(material => {
+        publishedSequenceNumbers.push(material.getSequenceNumberPublished())
+      });
+
+      sequenceNumberPublished = (Math.max.apply(Math, publishedSequenceNumbers)) + 1;
+
+      if (!isFinite(sequenceNumberPublished)) {
+        sequenceNumberPublished = 1;
+      }
+      material.setSequenceNumberPublished(sequenceNumberPublished);
+
+      this.materialService.update(material.getSequenceNumber(), material).subscribe(data => {
+        this.router.navigate(['material', this.material.getSequenceNumber()]);
+      }, error => {
+        this.creationFailed = true;
+      });
     });
   }
 
