@@ -123,6 +123,8 @@ hr {
 
 .info {
   font-size: 17pt;
+  letter-spacing: 4px;
+  line-height: 1.05;
 }
 
 .ingredient {
@@ -179,7 +181,9 @@ hr {
 }
 
 .maker {
-  font-size: 13pt;
+  margin-top: 1%;
+  font-size: 15pt;
+  letter-spacing: 5px;
 }
 
 .MaterialPDF {
@@ -188,7 +192,6 @@ hr {
 
 .ratio {
   margin-top: 3%;
-  margin-left: -3%;
 }
 
 .ratioPDF {
@@ -198,7 +201,7 @@ hr {
 }
 
 .makerr {
-  margin-top: -12%;
+  margin-top: -13%;
 }
 
 .tags-container2 {
