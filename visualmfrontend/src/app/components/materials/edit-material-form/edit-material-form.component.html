@@ -123,14 +123,14 @@
             <div class="form-row mt-2">
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="ingredient" type="text" value=""
-                       placeholder="Name" maxlength="15"
+                       placeholder="Name" maxlength="20"
                        [ngClass]="{'is-invalid': !materialForm.get('ingredient').valid && materialForm.get('ingredient').touched,
 			                  'is-valid': materialForm.get('ingredient').valid && materialForm.get('ingredient').touched}"/>
               </div>
 
               <div class="col-md-12 mt-2 col-sm-3 col-lg-3">
                 <input class="form-control rounded-pill" formControlName="ingredientType" type="text" value=""
-                       placeholder="Type" maxlength="15"
+                       placeholder="Type" maxlength="20"
                        [ngClass]="{'is-invalid': !materialForm.get('ingredientType').valid && materialForm.get('ingredientType').touched,
                        'is-valid': materialForm.get('ingredientType').valid && materialForm.get('ingredientType').touched}"/>
               </div>
@@ -190,10 +190,10 @@
               <div class="col-md-12 mt-2 col-lg-6">
                 <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step"
                        (keydown.enter)="addStep()"
-                       maxlength="40" [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
+                       maxlength="50" [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
 			                 'is-valid': materialForm.get('step').valid && materialForm.get('step').touched}"/>
                 <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}
-                  /40]</span>
+                  /50]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
                 <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()"
@@ -236,7 +236,7 @@
 
             <h2 class="h2">
               <div class="form-check outside-form">
-                REFERENCES & CHANGES:
+                REFERENCE & CHANGES:
                 <label class="form-check-label" for="variation">
                   <input formControlName="variationOn" type="checkbox" class="form-check-input" id="variation"/>
                   <span class="checkmark"></span>
@@ -247,14 +247,14 @@
             <div class="form-row mb-2" [ngClass]="{'is-hidden': materialForm.get('variationOn').value}">
               <div class="col-md-12 col-lg-4 mb-2">
                 <input class="form-control rounded-pill" type="text" value="" placeholder="Author"
-                       formControlName="referenceAuthor" maxlength="70"
+                       formControlName="referenceAuthor" maxlength="15"
                        [ngClass]="{'is-invalid': !materialForm.get('referenceAuthor').valid && materialForm.get('referenceAuthor').touched,
                        'is-valid': materialForm.get('referenceAuthor').valid && materialForm.get('referenceAuthor').touched}"/>
               </div>
 
               <div class="col-md-12 col-lg-4 mb-2">
                 <input class="form-control rounded-pill" type="text" placeholder="Title"
-                       formControlName="referenceTitle" maxlength="30"
+                       formControlName="referenceTitle" maxlength="20"
                        [ngClass]="{'is-invalid': !materialForm.get('referenceTitle').valid && materialForm.get('referenceTitle').touched,
                        'is-valid': materialForm.get('referenceTitle').valid && materialForm.get('referenceTitle').touched}"/>
               </div>
@@ -315,12 +315,12 @@
 
             <div class="form-group">
               <textarea class="form-control textareaBox" cols="30" rows="10"
-                        formControlName="changes" maxlength="100"
+                        formControlName="changes" maxlength="80"
                         [ngClass]="{'is-invalid': !materialForm.get('changes').valid && materialForm.get('changes').touched,
                          'is-valid': materialForm.get('changes').valid && materialForm.get('changes').touched}"
                         placeholder="Describe your changes">
               </textarea>
-              <span *ngIf="materialForm.get('changes').value">[{{materialForm.get('changes').value.length}}/100]</span>
+              <span *ngIf="materialForm.get('changes').value">[{{materialForm.get('changes').value.length}}/80]</span>
               <small class="help-block smallTextError"
                      *ngIf="!materialForm.get('changes').valid && materialForm.get('changes').touched">
                 &bull; Please describe the changes you have made.

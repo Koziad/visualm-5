@@ -101,7 +101,7 @@
           <h1 class="title">MAKING PROCEDURE:</h1>
           <div class="procedure-container mt-2">
             <ul>
-              <li *ngFor="let stepItem of steps" class="mb-1 info">
+              <li *ngFor="let stepItem of steps" class="mb-1 info word-break">
                 {{ stepItem }}
               </li>
             </ul>
@@ -113,7 +113,7 @@
 
       <div id="reference" class="row mt-4">
         <div class="col-md-6">
-          <h1 class="title">REFERENCES & CHANGES: </h1>
+          <h1 class="title">REFERENCE & CHANGES: </h1>
           <p class="info" *ngIf="material?.getParentId()">
             {{parentMaterial?.getName() }} by {{ parentAuthor?.getFirstname() + " " + parentAuthor?.getLastname() }}
           </p>
@@ -250,7 +250,7 @@
 
 
               <div class="changes">
-                <h1 class="title">REFERENCES & CHANGES: </h1>
+                <h1 class="title">REFERENCE & CHANGES: </h1>
                 <p class="info" *ngIf="material?.getParentId()">
                   {{parentMaterial?.getName() }} by {{ parentAuthor?.getFirstname() + " " + parentAuthor?.getLastname() }}
                 </p>
@@ -260,7 +260,7 @@
                   </p>
 
                   <p class="info word-break changesTekst">
-                    Changes made: {{material?.getChanges() }}
+                    {{material?.getChanges() }}
                   </p>
                 </div>
               </div>
