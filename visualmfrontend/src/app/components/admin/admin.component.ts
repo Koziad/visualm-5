@@ -6,7 +6,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
-import {IngredientService} from '../../services/ingredient.service';
 import {MaterialsService} from '../../services/materials.service';
 import {Ingredient} from '../../models/ingredient';
 import {Material} from '../../models/material';
@@ -16,7 +15,6 @@ import {Report} from '../../models/report';
 import {ReportService} from '../../services/report.service';
 import {MaterialIngredient} from '../../models/material-ingredient';
 import {Tag} from '../../models/tag';
-import {isNotNullOrUndefined} from 'codelyzer/util/isNotNullOrUndefined';
 import {AppConfigService} from '../../services/app-config.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -28,13 +26,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class AdminComponent implements OnInit {
   public users: User[] = [];
-  public ingredients: Ingredient[] = [];
   public materials: Material[] = [];
   public matchingMaterials: Material[] = [];
   public reports: Report[] = [];
-  ingredientDataSource: MatTableDataSource<Ingredient>;
-  ingredientColumns: string[] = ['id', 'name', 'type', 'action'];
-  ingredientDataColumns: string[] = this.ingredientColumns;
   materialDataSource: MatTableDataSource<Material>;
   materialColumns: string[] = ['sequence_number', 'name', 'status', 'created', 'action'];
   materialDataColumns: string[] = this.materialColumns;
@@ -60,19 +54,17 @@ export class AdminComponent implements OnInit {
   public selectedId: number;
   deletePopup: boolean = false;
 
-  @ViewChild('paginatorIngredient') paginatorIngredient: MatPaginator;
   @ViewChild('paginatorMaterial') paginatormaterial: MatPaginator;
   @ViewChild('paginatorUser') paginatorUser: MatPaginator;
   @ViewChild('paginatorReport') paginatorReport: MatPaginator;
 
-  @ViewChild('sortIngredient') sortIngredient: MatSort;
   @ViewChild('sortMaterial') sortMaterial: MatSort;
   @ViewChild('sortUser') sortUser: MatSort;
   @ViewChild('sortReport') sortReport: MatSort;
 
   @ViewChild(MatTableDataSource, {static: true}) table: MatTableDataSource<any>;
 
-  constructor(private ingredientService: IngredientService, private materialsService: MaterialsService, private userService: UserService,
+  constructor( private materialsService: MaterialsService, private userService: UserService,
               private router: Router, public dialog: MatDialog, private authService: AuthService, private reportService: ReportService,
               private configService: AppConfigService, private snackBar: MatSnackBar) {
     this.config = {
@@ -109,16 +101,9 @@ export class AdminComponent implements OnInit {
       this.userDataSource.sort = this.sortUser;
     });
 
-    this.ingredientService.getAll().subscribe(ingredients => {
-      ingredients.forEach((ingredient) => {
-        const currentIngredient: Ingredient = Object.assign(new Ingredient(), ingredient);
-        this.ingredients.push(currentIngredient);
-      });
 
-      this.ingredientDataSource = new MatTableDataSource<Ingredient>(this.ingredients);
-      this.ingredientDataSource.paginator = this.paginatorIngredient;
-      this.ingredientDataSource.sort = this.sortIngredient;
-    });
+
+
 
     this.materialsService.getAll().subscribe(materials => {
       materials.forEach((material) => {
@@ -156,12 +141,6 @@ export class AdminComponent implements OnInit {
   }
 
   onDelete(element: any): void {
-    if (element instanceof Ingredient) {
-      this.ingredientService.delete(element.getId());
-      this.ingredientDataSource.data.splice(this.ingredientDataSource.data.indexOf(element), 1);
-      this.ingredientDataSource._updateChangeSubscription();
-      this.deletePopup = false;
-    }
     if (element instanceof Material) {
       this.materialsService.delete(element.getSequenceNumber());
       this.materialDataSource.data.splice(this.materialDataSource.data.indexOf(element), 1);
@@ -259,16 +238,11 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  applyFilterIngredients(event: Event): void {
-    const filterValue = (event.target as HTMLInputElement).value;
-
-    if (this.ingredientDataSource.paginator) {
-      this.ingredientDataSource.filter = filterValue.trim().toLowerCase();
-      this.ingredientDataSource.paginator.firstPage();
-    }
 
 
-  }
+
+
+
 
   applyFilterMaterial(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -303,47 +277,39 @@ export class AdminComponent implements OnInit {
     setTimeout(() => {
       switch (indexNumber) {
         case 0:
-          this.ingredientDataSource.paginator = this.paginatorIngredient;
           this.materialDataSource.paginator = null;
           this.userDataSource.paginator = null;
           this.reportDataSource.paginator = null;
 
-          this.ingredientDataSource.sort = this.sortIngredient;
           this.materialDataSource.sort = null;
           this.userDataSource.sort = null;
           this.reportDataSource.sort = null;
           break;
         case 1:
           this.materialDataSource.paginator = this.paginatormaterial;
-          this.ingredientDataSource.paginator = null;
           this.userDataSource.paginator = null;
           this.reportDataSource.paginator = null;
 
           this.materialDataSource.sort = this.sortMaterial;
-          this.ingredientDataSource.sort = null;
           this.userDataSource.sort = null;
           this.reportDataSource.sort = null;
           break;
         case 2:
           this.userDataSource.paginator = this.paginatorUser;
-          this.ingredientDataSource.paginator = null;
           this.materialDataSource.paginator = null;
           this.reportDataSource.paginator = null;
 
           this.userDataSource.sort = this.sortUser;
-          this.ingredientDataSource.sort = null;
           this.materialDataSource.sort = null;
           this.reportDataSource.sort = null;
           break;
 
         case 3:
           this.reportDataSource.paginator = this.paginatorReport;
-          this.ingredientDataSource.paginator = null;
           this.materialDataSource.paginator = null;
           this.userDataSource.paginator = null;
 
           this.reportDataSource.sort = this.sortReport;
-          this.ingredientDataSource.sort = null;
           this.materialDataSource.sort = null;
           this.userDataSource.sort = null;
           break;
