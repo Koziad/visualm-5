@@ -385,7 +385,7 @@ export class AdminComponent implements OnInit {
         }
         csvArray.push('\t ');
 
-       
+
 
         //Assign object type for the user
         const currentUser: User = Object.assign(new User(), x.getUser());

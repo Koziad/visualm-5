@@ -42,7 +42,6 @@ export class MaterialComponent implements OnInit, OnDestroy {
   public canReport = false;
   loadingDone: boolean = false;
   public reportMessage: string;
-  public ratio: string;
 
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
@@ -96,7 +95,6 @@ export class MaterialComponent implements OnInit, OnDestroy {
 
             });
           }
-          this.calculateRatio();
         }, error => {
           if (error.status === 404) {
             this.router.navigate(['/not-found']);
@@ -104,26 +102,6 @@ export class MaterialComponent implements OnInit, OnDestroy {
         });
       }
     });
-  }
-
-  calculateRatio(): void {
-    let totalVolume = 0;
-    this.ratio = "Ratio of ";
-
-    for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
-      const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
-      totalVolume += currentMaterialIngredient.getAmount();
-    }
-
-      let partOfRatio = totalVolume/100;
-
-    for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
-      const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
-      const currentIngredient: Ingredient = Object.assign(new Ingredient(), currentMaterialIngredient.getIngredient());
-      this.ratio += currentIngredient.getName() + " " + (Math.round(((currentMaterialIngredient.getAmount()/partOfRatio) + Number.EPSILON) * 100) / 100) + "%: "
-    }
-
-    this.ratio += "by weight";
   }
 
   onSelect(value): void {
