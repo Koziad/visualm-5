@@ -59,6 +59,11 @@
           <mat-cell *matCellDef="let row"> {{row.creationDate}}</mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="user">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Author name</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.user.firstname}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="action">
           <mat-header-cell *matHeaderCellDef> Action</mat-header-cell>
           <mat-cell *matCellDef="let element">

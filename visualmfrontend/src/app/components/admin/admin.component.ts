@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   public matchingMaterials: Material[] = [];
   public reports: Report[] = [];
   materialDataSource: MatTableDataSource<Material>;
-  materialColumns: string[] = ['sequence_number', 'name', 'status', 'created', 'action'];
+  materialColumns: string[] = ['sequence_number', 'name', 'status', 'created','user', 'action'];
   materialDataColumns: string[] = this.materialColumns;
   userDataSource: MatTableDataSource<User>;
   userColumns: string[] = ['id', 'email', 'name', 'action'];
