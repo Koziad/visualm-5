@@ -1,12 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Calibri Light";
+  src: local("Calibri Light"), url(/assets/fonts/calibril.ttf) format("truetype");
+}
+
 body{
-  font-family: "Calibri Light", "Roboto Light", sans-serif;
+  font-family: "Calibri Light ", "Roboto Light", sans-serif;
   background-color: #F5F5F5;
 }
 
 * {
-  font-family: "Calibri Light", "Roboto Light", sans-serif !important;
+  font-family: "Calibri Light ", "Roboto Light", sans-serif !important;
 }
+
+
 
 .is-primary {
     background-color: #00bcd4;
@@ -24,4 +31,4 @@ body{
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: "Calibri Light", "Roboto Light", sans-serif; }
+body { margin: 0; font-family: "Calibri Light ", "Roboto Light", sans-serif; }
