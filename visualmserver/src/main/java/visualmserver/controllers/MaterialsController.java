@@ -66,6 +66,20 @@ public class MaterialsController {
         return material;
     }
 
+    @GetMapping("published/{sequenceNumberPublished}")
+    public Material getMaterialFromSequenceNumberPublished(@PathVariable Long sequenceNumberPublished) throws IOException {
+        Material material = this.materialsRepository.getMaterialBySequenceNumberPublished(sequenceNumberPublished);
+
+        if (material == null) {
+            throw new ResourceNotFoundException(String.format("Material not found with sequenceNumberPublished=%d", sequenceNumberPublished));
+        }
+
+        material.setOverviewURL(FileUploadHandler.getFileBase64(material.getOverviewURL()));
+        material.setCloseUpURL(FileUploadHandler.getFileBase64(material.getCloseUpURL()));
+
+        return material;
+    }
+
     @GetMapping("/user/{id}")
     public List<Material> getMaterialFromUserId(@PathVariable int id) throws IOException {
         User user = this.userRepository.getUserById(id);

@@ -359,7 +359,7 @@ export class MaterialFormComponent implements OnInit {
       return;
     }
 
-    this.materialService.getBySequenceNumber(Number(seqNumberControl.value)).subscribe(
+    this.materialService.getBySequenceNumberPublished(Number(seqNumberControl.value)).subscribe(
       data => {
         this.searchFailed = true;
         this.recipeTitle = '';

@@ -3,14 +3,14 @@
     <h1 class="text-center">Sign up</h1>
     <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="form-group">
-        <input #firstname="ngModel"  type="text" class="form-control" required [(ngModel)]="signup.firstname" pattern="^[a-zA-Z ]*$" name="Firstname" placeholder="* Firstname"/>
+        <input #firstname="ngModel"  type="text" class="form-control" required [(ngModel)]="signup.firstname" pattern="^[a-zA-Z- ]*$" name="Firstname" placeholder="* Firstname"/>
         <div *ngIf="firstname.errors && (firstname.dirty || firstname.touched)">
           <small class="smallTextError" *ngIf="firstname.errors.required">&bull; Firstname is required</small>
           <small class="smallTextError" *ngIf="firstname.errors.pattern">&bull; Not an valid name</small>
         </div>
       </div>
       <div class="form-group">
-        <input #lastname="ngModel" type="text" class="form-control" required [(ngModel)]="signup.lastname" pattern="^[a-zA-Z ]*$" name="Lastname" placeholder="* Lastname"/>
+        <input #lastname="ngModel" type="text" class="form-control" required [(ngModel)]="signup.lastname" pattern="^[a-zA-Z- ]*$" name="Lastname" placeholder="* Lastname"/>
         <div *ngIf="lastname.errors && (lastname.dirty || lastname.touched)">
           <small class="smallTextError" *ngIf="lastname.errors.required">&bull; Lastname is required</small>
           <small class="smallTextError" *ngIf="lastname.errors.pattern">&bull; Not an valid name</small>

@@ -90,7 +90,7 @@
           <h1 class="title">INGREDIENTS:</h1>
           <div class="ingredient-container mt-3">
             <ul>
-              <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1 info">
+              <li *ngFor="let mi of ingredientArray" class="mb-1 info">
                 {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
               </li>
             </ul>
@@ -128,11 +128,7 @@
         </div>
       </div>
 
-      <div class="text-center">
-        <p class="info ratio" style="display: inline-block">
-          {{ ratio }}
-        </p>
-      </div>
+
 
       <hr/>
 
@@ -242,7 +238,7 @@
               <h1 class="title">INGREDIENTS:</h1>
               <div class="ingredient-container mt-3">
                 <ul>
-                  <li *ngFor="let mi of material?.getMaterialIngredients()" class="mb-1 info ingredient">
+                  <li *ngFor="let mi of ingredientArray" class="mb-1 info ingredient">
                     {{ mi.ingredient.name }}-{{ mi.ingredient.type }} {{ mi.amount }} gr
                   </li>
                 </ul>

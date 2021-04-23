@@ -16,8 +16,6 @@ import {ReportService} from '../../../services/report.service';
 import {Report} from '../../../models/report';
 import {AppConfigService} from '../../../services/app-config.service';
 import {MaterialIngredient} from '../../../models/material-ingredient';
-import {Ingredient} from '../../../models/ingredient';
-import {isElementScrolledOutsideView} from '@angular/cdk/overlay/position/scroll-clip';
 
 @Component({
   selector: 'app-material',
@@ -42,7 +40,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
   public canReport = false;
   loadingDone: boolean = false;
   public reportMessage: string;
-  public ratio: string;
+  ingredientArray: MaterialIngredient[] = [];
 
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
@@ -96,7 +94,9 @@ export class MaterialComponent implements OnInit, OnDestroy {
 
             });
           }
-          this.calculateRatio();
+
+          this.getIngredients();
+
         }, error => {
           if (error.status === 404) {
             this.router.navigate(['/not-found']);
@@ -106,24 +106,15 @@ export class MaterialComponent implements OnInit, OnDestroy {
     });
   }
 
-  calculateRatio(): void {
-    let totalVolume = 0;
-    this.ratio = "Ratio of ";
+  getIngredients() {
+    const ingredients = this.material.getMaterialIngredients();
 
-    for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
-      const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
-      totalVolume += currentMaterialIngredient.getAmount();
+    for (let i = 0; i < ingredients.length; i++) {
+      this.ingredientArray.push(ingredients[i]);
     }
-
-      let partOfRatio = totalVolume/100;
-
-    for (let i = 0; i < this.material.getMaterialIngredients().length; i++) {
-      const currentMaterialIngredient: MaterialIngredient = Object.assign(new MaterialIngredient(), this.material.getMaterialIngredients()[i]);
-      const currentIngredient: Ingredient = Object.assign(new Ingredient(), currentMaterialIngredient.getIngredient());
-      this.ratio += currentIngredient.getName() + " " + (Math.round(((currentMaterialIngredient.getAmount()/partOfRatio) + Number.EPSILON) * 100) / 100) + "%: "
-    }
-
-    this.ratio += "by weight";
+    // @ts-ignore
+    this.ingredientArray.sort((a, b) => a.ingredient.name.localeCompare(b.ingredient.name))
+    console.log(this.ingredientArray)
   }
 
   onSelect(value): void {
