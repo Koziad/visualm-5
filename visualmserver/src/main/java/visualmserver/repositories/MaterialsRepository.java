@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 @Repository
 public interface MaterialsRepository extends JpaRepository<Material, Long> {
     Material getMaterialBySequenceNumber(Long sequenceNumber);
+    Material getMaterialBySequenceNumberPublished(Long sequenceNumberPublished);
     List<Material> getMaterialsByUser (User user);
     @Modifying
     @Transactional
