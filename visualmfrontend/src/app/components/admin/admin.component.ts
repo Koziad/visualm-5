@@ -53,6 +53,7 @@ export class AdminComponent implements OnInit {
   popupImportExportHidden: boolean = true;
   public selectedId: number;
   deletePopup: boolean = false;
+  deleteSelected: any;
 
   @ViewChild('paginatorMaterial') paginatormaterial: MatPaginator;
   @ViewChild('paginatorUser') paginatorUser: MatPaginator;
@@ -134,27 +135,28 @@ export class AdminComponent implements OnInit {
 
   }
 
-  onDeletePopup(): void {
+  onDeletePopup(element): void {
+    this.deleteSelected = element
     this.deletePopup = true;
   }
 
-  onDelete(element: any): void {
+  onDelete(): void {
 
-    if (element instanceof Material) {
-      this.materialsService.delete(element.getSequenceNumber());
-      this.materialDataSource.data.splice(this.materialDataSource.data.indexOf(element), 1);
+    if (this.deleteSelected instanceof Material) {
+      this.materialsService.delete(this.deleteSelected.getSequenceNumber());
+      this.materialDataSource.data.splice(this.materialDataSource.data.indexOf(this.deleteSelected), 1);
       this.materialDataSource._updateChangeSubscription();
       this.deletePopup = false;
     }
-    if (element instanceof User) {
-      this.userService.delete(element.getId());
-      this.userDataSource.data.splice(this.userDataSource.data.indexOf(element), 1);
+    if (this.deleteSelected instanceof User) {
+      this.userService.delete(this.deleteSelected.getId());
+      this.userDataSource.data.splice(this.userDataSource.data.indexOf(this.deleteSelected), 1);
       this.userDataSource._updateChangeSubscription();
       this.deletePopup = false;
     }
-    if (element instanceof Report) {
-      this.reportService.delete(element.getId());
-      this.reportDataSource.data.splice(this.reportDataSource.data.indexOf(element), 1);
+    if (this.deleteSelected instanceof Report) {
+      this.reportService.delete(this.deleteSelected.getId());
+      this.reportDataSource.data.splice(this.reportDataSource.data.indexOf(this.deleteSelected), 1);
       this.reportDataSource._updateChangeSubscription();
       this.deletePopup = false;
     }

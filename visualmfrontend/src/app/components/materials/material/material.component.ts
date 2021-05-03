@@ -106,6 +106,11 @@ export class MaterialComponent implements OnInit, OnDestroy {
     });
   }
 
+  onDelete(sequenceNumber) {
+    this.materialService.delete(sequenceNumber);
+    this.router.navigate(['/']);
+  }
+
   getIngredients() {
     const ingredients = this.material.getMaterialIngredients();
 

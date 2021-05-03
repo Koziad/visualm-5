@@ -15,14 +15,19 @@
               *ngIf="canDuplicate">Duplicate Label
       </button>
 
-      <button id="report" type="button" class="btn btn-primary form-control float-right ml-2" *ngIf="canReport"
-              data-toggle="modal" data-target="#reportModal" matTooltip="Report">
-        <img height="20" src="assets/icons/outlined_flag-24px.svg">
+      <button id="delete" type="button" class="btn btn-primary form-control float-right ml-2" *ngIf="canEdit"
+              (click)="onDelete(material?.getSequenceNumber())" matTooltip="Delete">
+        <img height="22" src="assets/icons/deleteWhite.svg">
       </button>
 
-      <button id="edit" type="button" class="btn btn-primary form-control float-right" *ngIf="canEdit"
+      <button id="edit" type="button" class="btn btn-primary form-control float-right ml-2" *ngIf="canEdit"
               routerLink="/materials/edit/{{ material?.getSequenceNumber() }}" matTooltip="Edit">
         <img height="20" src="assets/icons/pencil.svg">
+      </button>
+
+      <button id="report" type="button" class="btn btn-primary form-control float-right" *ngIf="canReport"
+              data-toggle="modal" data-target="#reportModal" matTooltip="Report">
+        <img height="20" src="assets/icons/outlined_flag-24px.svg">
       </button>
 
       <!-- Report Modal -->
