@@ -1,6 +1,7 @@
 <div id="Material" class="container-fluid Material">
   <div class="pt-5">
-    <div class="shadow bg-light p-3 outerMaterial">
+    <div style="text-align: center;"><img *ngIf="!loadingDone" src="assets/icons/loadingIcon.svg" alt="Loading"></div>
+    <div *ngIf="loadingDone" class="shadow bg-light p-3 outerMaterial">
       <button type="button" class="btn is-primary form-control sizeBtnMat pdfButton" id="size-btn" (click)="generatePdf()"
               *ngIf="canGeneratePDF">Generate PDF Label
       </button>

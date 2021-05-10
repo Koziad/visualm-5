@@ -1,4 +1,5 @@
-<div class="container-fluid Material">
+<div style="text-align: center;"><img *ngIf="!loadingDone" src="assets/icons/loadingIcon.svg" alt="Loading"></div>
+<div *ngIf="loadingDone" class="container-fluid Material">
   <div class="pt-5">
     <form [formGroup]="materialForm" (ngSubmit)="onCreateLabelPublished()" (keydown.enter)="$event.preventDefault()">
 
@@ -364,7 +365,7 @@
             Cancel
           </button>
             <div class="saveButtonFlex">
-          <button class="btn is-primary form-control saveBtnMat" id="save-btn" type="submit">
+          <button [disabled]="onSubmitDisable"  class="btn is-primary form-control saveBtnMat" id="save-btn" type="submit">
             <img height="18" src="assets/icons/content-save.svg">
             Save as
           </button>

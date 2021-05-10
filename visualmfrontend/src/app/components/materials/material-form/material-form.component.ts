@@ -47,6 +47,7 @@ export class MaterialFormComponent implements OnInit {
   protected parentId: number = null;
   public materials: Material[] = [];
   public popupPublish:boolean = false;
+  loadingDone:boolean = true;
 
   @ViewChild('overviewImg') overviewFileUpload: FileUploadComponent;
   @ViewChild('closeUpImg') closeUpFileUpload: FileUploadComponent;
@@ -56,6 +57,7 @@ export class MaterialFormComponent implements OnInit {
 
   public materialForm: FormGroup;
   public bitlyURL: string;
+  onSubmitDisable: boolean = false;
 
   constructor(protected materialService: MaterialsService, protected ingredientService: IngredientService,
               protected router: Router, protected userService: UserService, protected authService: AuthService,
@@ -154,6 +156,8 @@ export class MaterialFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    this.onSubmitDisable = true;
+    this.loadingDone = false;
     let changes = "No changes";
     if (this.materialForm.get('changes').value != null) {
       changes = this.materialForm.get('changes').value.trim();
@@ -198,6 +202,7 @@ export class MaterialFormComponent implements OnInit {
 
     let publishedSequenceNumbers = [];
     let sequenceNumberPublished = 0;
+
 
     this.materialService.getAll().subscribe(materials => {
       materials.forEach((material) => {
