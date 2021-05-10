@@ -32,7 +32,7 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
   public overviewImagePreview: string;
   public closeUpImagePreview: string;
   loadingEditDone:boolean = true;
-  onSubmitEdit:boolean = true;
+  onSubmitEdit:boolean = false;
 
   constructor(protected materialService: MaterialsService, protected ingredientService: IngredientService,
               protected router: Router, protected userService: UserService, protected authService: AuthService,
