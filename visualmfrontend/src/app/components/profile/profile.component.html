@@ -112,7 +112,7 @@
     <div class="col-md-12 text-center">
       <h2 *ngIf="notLoggedinUser">Labels</h2>
       <h2 *ngIf="!notLoggedinUser">My Labels</h2>
-      <img *ngIf="!loadingMaterialsDone && materials.length !== 0" src="assets/icons/loadingIcon.svg" alt="Loading">
+      <img *ngIf="!loadingMaterialsDone && materials.length > 0" src="assets/icons/loadingIcon.svg" alt="Loading">
     </div>
   </div>
 
@@ -150,7 +150,7 @@
   </div>
 
   <ng-template #noMaterials>
-    <div class="row mt-2">
+    <div *ngIf="loadingMaterialsDone || materials.length <= 0" class="row mt-2">
       <div class="col-md-12 mt-2 text-center">
         No labels found
       </div>

@@ -31,6 +31,8 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
   public material: Material;
   public overviewImagePreview: string;
   public closeUpImagePreview: string;
+  loadingEditDone:boolean = true;
+  onSubmitEdit:boolean = false;
 
   constructor(protected materialService: MaterialsService, protected ingredientService: IngredientService,
               protected router: Router, protected userService: UserService, protected authService: AuthService,
@@ -177,6 +179,8 @@ export class EditMaterialFormComponent extends MaterialFormComponent implements 
   }
 
   public onSubmit(): void {
+    this.onSubmitEdit = true;
+    this.loadingEditDone = false;
 
     if (this.isDuplicateAction) {
       // Get image from the label that was requested to duplicate
