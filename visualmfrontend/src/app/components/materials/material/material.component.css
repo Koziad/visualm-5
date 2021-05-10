@@ -213,13 +213,6 @@ hr {
   letter-spacing: 4px;
   margin-left: 4%;
 }
-
-.changes {
-  margin: 0;
-  width: auto;
-  max-width: 400px;
-  position: absolute;
-}
 .stepsIngredients {
   display: flex;
   flex-direction: row;
@@ -227,11 +220,17 @@ hr {
   justify-content: space-around;
   position: relative;
 }
+.changes {
+  margin: 0;
+  width: auto;
+  max-width: 400px;
+}
 .IngredientsDiv {
   margin-right: 5px;
 }
 .ProcedureDiv {
   margin-left: 5px;
+  max-width: 500px;
 }
 .markerBottom {
   margin: 0 auto;
