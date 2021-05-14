@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
   public matchingMaterials: Material[] = [];
   public reports: Report[] = [];
   materialDataSource: MatTableDataSource<Material>;
-  materialColumns: string[] = ['sequence_number', 'name', 'status', 'created','user', 'action'];
+  materialColumns: string[] = ['sequenceNumber', 'name', 'saveStatus', 'creationDate','user', 'action'];
   materialDataColumns: string[] = this.materialColumns;
   userDataSource: MatTableDataSource<User>;
   userColumns: string[] = ['id', 'email', 'name', 'action'];
@@ -89,7 +89,7 @@ export class AdminComponent implements OnInit {
       'organisation': ''
     };
 
-    this.getUserProfile();
+     this.getUserProfile();
 
     this.userService.getAll().subscribe(users => {
       users.forEach((user) => {
