@@ -9,7 +9,7 @@ export class Material {
   public static readonly MAXIMUM_INGREDIENTS = 6;
   private static FORMAT = '00000';
   private sequenceNumber: number;
-  private sequenceNumberPublished: number;
+  sequenceNumberPublished: number;
   private name: string;
   private creationDate: Date;
   private changes: string;

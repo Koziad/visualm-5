@@ -41,6 +41,7 @@ export class MaterialFormComponent implements OnInit {
   public creationDate: Date;
   public sequenceNumber: string;
   public creationFailed = false;
+  public fileError = false;
   public saveStatus = SaveStatus;
   public user: User;
   public logoPath: string;
@@ -157,7 +158,6 @@ export class MaterialFormComponent implements OnInit {
 
   public onSubmit(): void {
     this.onSubmitDisable = true;
-    this.loadingDone = false;
     let changes = "No changes";
     if (this.materialForm.get('changes').value != null) {
       changes = this.materialForm.get('changes').value.trim();
@@ -203,35 +203,43 @@ export class MaterialFormComponent implements OnInit {
     let publishedSequenceNumbers = [];
     let sequenceNumberPublished = 0;
 
+    if (this.overviewFileUpload.isValid() && this.closeUpFileUpload.isValid()) {
+      this.loadingDone = false;
 
-    this.materialService.getAll().subscribe(materials => {
-      materials.forEach((material) => {
-        const currentMaterial: Material = Material.trueCopy(material);
+      this.materialService.getAll().subscribe(materials => {
+        materials.forEach((material) => {
+          const currentMaterial: Material = Material.trueCopy(material);
 
-        // Only display PUBLISHED labels
-        if (currentMaterial.getSaveStatus() === SaveStatus.PUBLISHED) {
-          this.materials.push(currentMaterial);
+          // Only display PUBLISHED labels
+          if (currentMaterial.getSaveStatus() === SaveStatus.PUBLISHED) {
+            this.materials.push(currentMaterial);
+          }
+        });
+
+        this.materials.forEach(material => {
+          publishedSequenceNumbers.push(material.getSequenceNumberPublished())
+        });
+
+        sequenceNumberPublished = (Math.max.apply(Math, publishedSequenceNumbers)) + 1;
+
+        if (!isFinite(sequenceNumberPublished)) {
+          sequenceNumberPublished = 1;
         }
+        material.setSequenceNumberPublished(sequenceNumberPublished);
+
+        this.materialService.save(material).subscribe(data => {
+          this.creationFailed = false;
+          this.router.navigate(['/home']);
+        }, error => {
+          console.log(error);
+          this.creationFailed = true;
+        });
       });
-
-      this.materials.forEach(material => {publishedSequenceNumbers.push(material.getSequenceNumberPublished())});
-
-      sequenceNumberPublished = (Math.max.apply(Math, publishedSequenceNumbers))+1;
-
-      if (!isFinite(sequenceNumberPublished)) {
-        sequenceNumberPublished = 1;
-      }
-      material.setSequenceNumberPublished(sequenceNumberPublished);
-
-      this.materialService.save(material).subscribe(data => {
-        this.creationFailed = false;
-        this.router.navigate(['/home']);
-      }, error => {
-        console.log(error);
-        this.creationFailed = true;
-      });
-    });
+    } else {
+      this.fileError = true;
+    }
   }
+
 
   public validURL(control: FormControl): { [s: string]: boolean } {
     if (!control.value) {
