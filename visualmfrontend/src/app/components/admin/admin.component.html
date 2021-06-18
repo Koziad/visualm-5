@@ -38,7 +38,6 @@
     <div class="admin-data">
 
       <mat-table #sortMaterial="matSort" [dataSource]="materialDataSource" matSort>
-
         <ng-container matColumnDef="sequenceNumberPublished">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Sequence Number</mat-header-cell>
           <mat-cell *matCellDef="let row">#{{row.getFormattedSequenceNumber()}} </mat-cell>
