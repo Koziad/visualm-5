@@ -1,4 +1,4 @@
-# visualm-5
+# The Material Sample Management Tool
 The Material Sample Management Tool is an application to archive  alternative design materials that are renewable and compostable.
 This tool makes it easier to keep track of the new materials and view its information.
 
