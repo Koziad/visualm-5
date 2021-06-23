@@ -112,11 +112,12 @@
     <div class="col-md-12 text-center">
       <h2 *ngIf="notLoggedinUser">Labels</h2>
       <h2 *ngIf="!notLoggedinUser">My Labels</h2>
-      <img *ngIf="!loadingMaterialsDone && materials.length > 0" src="assets/icons/loadingIcon.svg" alt="Loading">
+      <img *ngIf="!loadingMaterialsDone" src="assets/icons/loadingIcon.svg" alt="Loading">
+      <h1 class="noresults" *ngIf="materials.length == 0 && loadingMaterialsDone">No labels</h1>
     </div>
   </div>
 
-  <div class="row mt-2" *ngIf="materials.length !== 0; else noMaterials">
+  <div class="row mt-2" *ngIf="materials.length !== 0;">
     <div class="col-md-5 col-lg-3 mt-2 cardDiv" *ngFor="let material of materials">
       <div class="card card-flip rounded shadow material-link" routerLink="/material/{{ material.getSequenceNumber() }}">
 
@@ -127,9 +128,9 @@
               <small class="materialId">#{{ material.getFormattedSequenceNumber() }}</small>
             </div>
             <img class="card-img-top rounded" alt="" *ngIf="!material.overviewURL"
-                 src="assets/images/missingImage.png"/>
+                 src="assets/images/missingImage.png" loading="lazy"/>
             <img class="card-img-top rounded" alt="" *ngIf="material.overviewURL"
-                 src="data:image/png;base64,{{ material.overviewURL }}"/>
+                 src="data:image/png;base64,{{ material.overviewURL }}" loading="lazy"/>
             <span class="badge is-primary badge-pill" *ngFor="let tag of material.getTags()">
 	            {{ materialTag[tag.name] }}
             </span>
@@ -148,12 +149,4 @@
       </div>
     </div>
   </div>
-
-  <ng-template #noMaterials>
-    <div *ngIf="loadingMaterialsDone || materials.length <= 0" class="row mt-2">
-      <div class="col-md-12 mt-2 text-center">
-        No labels found
-      </div>
-    </div>
-  </ng-template>
 </div>
