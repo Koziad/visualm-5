@@ -69,7 +69,10 @@
 
           <h3 id="materialType" class="type">{{ materialType[material?.getType()] }}</h3>
           <h3 id="materialNumber" class="Snumber">
-            #{{ material?.getFormattedSequenceNumber() }}</h3>
+
+            #{{ material?.getFormattedSequenceNumber() }}
+
+             </h3>
 
           <div id="tagsContainer" class="tags-container">
             <span class="badge is-primary badge-pill ml-1 tag" *ngFor="let tag of material?.getTags()">

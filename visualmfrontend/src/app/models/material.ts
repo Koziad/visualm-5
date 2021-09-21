@@ -48,10 +48,14 @@ export class Material {
   }
 
   public getFormattedSequenceNumber(): string {
-    if (this.sequenceNumberPublished == null) {
-      return "OLD" + this.sequenceNumber;
+    if (this.getSaveStatus() == 'DRAFT') {
+        return "DRAFT"
     } else {
-      return Material.FORMAT.substring(0, Material.FORMAT.length - this.getSequenceNumberPublished().toString().length) + this.getSequenceNumberPublished().toString();
+      if (this.sequenceNumberPublished == null) {
+        return "OLD" + this.sequenceNumber;
+      } else {
+        return Material.FORMAT.substring(0, Material.FORMAT.length - this.getSequenceNumberPublished().toString().length) + this.getSequenceNumberPublished().toString();
+      }
     }
   }
 
