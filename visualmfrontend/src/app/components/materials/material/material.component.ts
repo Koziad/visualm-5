@@ -132,7 +132,7 @@ export class MaterialComponent implements OnInit, OnDestroy {
 
   generatePdf(): void {
     const title = this.material.getName();
-    const sequenceNr = this.material.getSequenceNumber();
+    const sequenceNr = this.material.getFormattedSequenceNumber();
     const data = window.document.getElementById('pdfLabel');
     data.style.display = 'block';
 
@@ -224,7 +224,12 @@ export class MaterialComponent implements OnInit, OnDestroy {
         pdf.line(69.7, 48.5, 69.2, 56); // right vertical line
       }
 
-      pdf.save(title + ' ' + sequenceNr);
+      if (this.selectedFormat == null) {
+        pdf.save(title + '_' + sequenceNr + '_a4');
+      } else {
+        pdf.save(title + '_' + sequenceNr + '_' + this.selectedFormat);
+      }
+
     });
   }
 

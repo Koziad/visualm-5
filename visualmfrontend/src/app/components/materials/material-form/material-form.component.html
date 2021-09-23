@@ -192,10 +192,10 @@
 
             <div class="form-row">
               <div class="col-md-12 mt-2 col-lg-6">
-                <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step" maxlength="50"
+                <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step" maxlength="55"
                        [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
 			                  'is-valid': materialForm.get('step').valid && materialForm.get('step').touched}" (keydown.enter)="addStep()"/>
-                <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/50]</span>
+                <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/55]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
                 <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()" id="add-step-btn"
