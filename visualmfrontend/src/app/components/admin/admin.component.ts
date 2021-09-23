@@ -30,10 +30,10 @@ export class AdminComponent implements OnInit {
   public matchingMaterials: Material[] = [];
   public reports: Report[] = [];
   materialDataSource: MatTableDataSource<Material>;
-  materialColumns: string[] = ['sequenceNumber', 'name', 'saveStatus', 'creationDate','user', 'action'];
+  materialColumns: string[] = ['sequenceNumberPublished', 'name', 'saveStatus', 'creationDate','user', 'action'];
   materialDataColumns: string[] = this.materialColumns;
   userDataSource: MatTableDataSource<User>;
-  userColumns: string[] = ['id', 'email', 'name', 'action'];
+  userColumns: string[] = ['id', 'email', 'firstname', 'action'];
   userDataColumns: string[] = this.userColumns;
   reportDataSource: MatTableDataSource<Report>;
   reportColumns: string[] = ['id', 'message', 'user', 'solved', 'action'];
@@ -53,6 +53,8 @@ export class AdminComponent implements OnInit {
   popupImportExportHidden: boolean = true;
   public selectedId: number;
   deletePopup: boolean = false;
+  deleteSelected: any;
+  sequenceNumberPublished:string;
 
   @ViewChild('paginatorMaterial') paginatormaterial: MatPaginator;
   @ViewChild('paginatorUser') paginatorUser: MatPaginator;
@@ -101,8 +103,6 @@ export class AdminComponent implements OnInit {
       this.userDataSource.sort = this.sortUser;
     });
 
-
-
     this.materialsService.getAll().subscribe(materials => {
       materials.forEach((material) => {
         const currentMaterial: Material = Object.assign(new Material(), material);
@@ -112,6 +112,15 @@ export class AdminComponent implements OnInit {
       this.materialDataSource = new MatTableDataSource<Material>(this.materials);
       this.materialDataSource.paginator = this.paginatormaterial;
       this.materialDataSource.sort = this.sortMaterial;
+
+      this.materialDataSource.filterPredicate = (data, filter: string) => {
+        const accumulator = (currentTerm, key) => {
+          return this.nestedFilterCheck(currentTerm, data, key);
+        };
+        const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+        const transformedFilter = filter.trim().toLowerCase();
+        return dataStr.indexOf(transformedFilter) !== -1;
+      }
     });
 
     this.reportService.getAll().subscribe(reports => {
@@ -131,30 +140,44 @@ export class AdminComponent implements OnInit {
       this.config.organisation = config.organisation;
       this.config.logo_path = config.logo_path;
     });
-
   }
 
-  onDeletePopup(): void {
+  nestedFilterCheck(search, data, key) {
+    if (typeof data[key] === 'object') {
+      for (const k in data[key]) {
+        if (data[key][k] !== null) {
+          search = this.nestedFilterCheck(search, data[key], k);
+        }
+      }
+    } else {
+      search += data[key];
+    }
+    return search;
+  }
+
+
+  onDeletePopup(element): void {
+    this.deleteSelected = element
     this.deletePopup = true;
   }
 
-  onDelete(element: any): void {
+  onDelete(): void {
 
-    if (element instanceof Material) {
-      this.materialsService.delete(element.getSequenceNumber());
-      this.materialDataSource.data.splice(this.materialDataSource.data.indexOf(element), 1);
+    if (this.deleteSelected instanceof Material) {
+      this.materialsService.delete(this.deleteSelected.getSequenceNumber());
+      this.materialDataSource.data.splice(this.materialDataSource.data.indexOf(this.deleteSelected), 1);
       this.materialDataSource._updateChangeSubscription();
       this.deletePopup = false;
     }
-    if (element instanceof User) {
-      this.userService.delete(element.getId());
-      this.userDataSource.data.splice(this.userDataSource.data.indexOf(element), 1);
+    if (this.deleteSelected instanceof User) {
+      this.userService.delete(this.deleteSelected.getId());
+      this.userDataSource.data.splice(this.userDataSource.data.indexOf(this.deleteSelected), 1);
       this.userDataSource._updateChangeSubscription();
       this.deletePopup = false;
     }
-    if (element instanceof Report) {
-      this.reportService.delete(element.getId());
-      this.reportDataSource.data.splice(this.reportDataSource.data.indexOf(element), 1);
+    if (this.deleteSelected instanceof Report) {
+      this.reportService.delete(this.deleteSelected.getId());
+      this.reportDataSource.data.splice(this.reportDataSource.data.indexOf(this.deleteSelected), 1);
       this.reportDataSource._updateChangeSubscription();
       this.deletePopup = false;
     }
@@ -237,16 +260,20 @@ export class AdminComponent implements OnInit {
     });
   }
 
-
-
   applyFilterMaterial(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
+    let string = filterValue.replace(/\#/g,"");
+    let number = Number(string);
 
-    if (this.materialDataSource.paginator) {
-      this.materialDataSource.filter = filterValue.trim().toLowerCase();
-      this.materialDataSource.paginator.firstPage();
-    }
-
+    if (number){
+      if (this.materialDataSource.paginator) {
+        this.materialDataSource.filter = String(number);
+        this.materialDataSource.paginator.firstPage();
+      }
+    } else if (this.materialDataSource.paginator) {
+        this.materialDataSource.filter = filterValue.trim().toLowerCase();
+        this.materialDataSource.paginator.firstPage();
+      }
   }
 
   applyFilterReport(event: Event): void {
@@ -258,7 +285,6 @@ export class AdminComponent implements OnInit {
     }
 
   }
-
   applyFilterUser(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
 
@@ -371,7 +397,7 @@ export class AdminComponent implements OnInit {
     //Add materials to CSV
     this.materials.forEach(x => {
         csvArray.push(
-          x.getSequenceNumber() + '\t ' +
+          x.getFormattedSequenceNumber() + '\t ' +
           x.getName() + '\t ' +
           x.getChanges() + '\t ' +
           x.getCreationDate() + '\t ' +

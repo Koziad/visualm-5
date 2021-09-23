@@ -37,9 +37,9 @@
               <small class="materialId">#{{ material.getFormattedSequenceNumber() }}</small>
             </div>
             <img class="card-img-top rounded" alt="" *ngIf="!material.overviewURL"
-                 src="assets/images/missingImage.png"/>
+                 src="assets/images/missingImage.png" loading="lazy"/>
             <img class="card-img-top rounded" alt="" *ngIf="material.overviewURL"
-                 src="data:image/png;base64,{{ material.overviewURL }}"/>
+                 src="data:image/png;base64,{{ material.overviewURL }}" loading="lazy"/>
             <span class="badge is-primary badge-pill" *ngFor="let tag of material.getTags()">
 	            {{ materialTag[tag.name] }}
             </span>

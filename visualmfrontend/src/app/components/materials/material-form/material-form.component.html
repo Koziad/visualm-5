@@ -1,4 +1,5 @@
-<div class="container-fluid Material">
+<div style="text-align: center;"><img *ngIf="!loadingDone" src="assets/icons/loadingIcon.svg" alt="Loading"></div>
+<div *ngIf="loadingDone" class="container-fluid Material">
   <div class="pt-5">
     <form [formGroup]="materialForm" (ngSubmit)="onCreateLabelPublished()" (keydown.enter)="$event.preventDefault()">
 
@@ -191,10 +192,10 @@
 
             <div class="form-row">
               <div class="col-md-12 mt-2 col-lg-6">
-                <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step" maxlength="50"
+                <input class="form-control rounded-pill" type="text" formControlName="step" placeholder="Step" maxlength="55"
                        [ngClass]="{'is-invalid': !materialForm.get('step').valid && materialForm.get('step').touched,
 			                  'is-valid': materialForm.get('step').valid && materialForm.get('step').touched}" (keydown.enter)="addStep()"/>
-                <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/50]</span>
+                <span *ngIf="materialForm.get('step').value" class="m-2">[{{materialForm.get('step').value.length}}/55]</span>
               </div>
               <div class="col-md-12 mt-2 col-lg-6">
                 <button type="button" class="btn is-primary rounded-circle roundedBtn" (click)="addStep()" id="add-step-btn"
@@ -238,12 +239,12 @@
               <div class="form-check outside-form">
 
                 REFERENCE & CHANGES:
-                <label class="form-check-label" for="variation">
+<!--                <label class="form-check-label" for="variation">-->
 
-                  <input formControlName="variationOn" type="checkbox" class="form-check-input" id="variation"/>
+<!--                  <input formControlName="variationOn" type="checkbox" class="form-check-input" id="variation"/>-->
 
-                  <span class="checkmark"></span>
-                </label>
+<!--                  <span class="checkmark"></span>-->
+<!--                </label>-->
               </div>
             </h2>
 
@@ -358,13 +359,21 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
+          <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert" *ngIf="fileError">
+            <strong>Something went wrong!</strong> {{this.overviewFileUpload.getErrorMessage() || this.closeUpFileUpload.getErrorMessage()}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="creationFailed=false">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
           <div class="buttonsCreateLabel">
           <button routerLink="/home" class="btn is-primary form-control cancelButton">
             <img height="18" src="assets/icons/close.svg">
             Cancel
           </button>
             <div class="saveButtonFlex">
-          <button class="btn is-primary form-control saveBtnMat" id="save-btn" type="submit">
+          <button [disabled]="onSubmitDisable"  class="btn is-primary form-control saveBtnMat" id="save-btn" type="submit">
             <img height="18" src="assets/icons/content-save.svg">
             Save as
           </button>

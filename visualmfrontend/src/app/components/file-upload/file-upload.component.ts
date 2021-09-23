@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 export class FileUploadComponent implements OnInit {
 
   // 20MB in bytes
-  private static readonly MAX_SIZE: number = 20000000;
+  private static readonly MAX_SIZE: number = 2000000;
   private static readonly WHITELIST: [string, string, string] = ['jpg', 'png', 'jpeg'];
   private static instances = 0;
   public mediaDataURL: string;
@@ -50,7 +50,7 @@ export class FileUploadComponent implements OnInit {
 
     if (file.size > FileUploadComponent.MAX_SIZE) {
       this.valid = false;
-      this.errorMessage = 'File size cannot exceed 20MB.';
+      this.errorMessage = 'File size cannot exceed 2MB.';
     }
 
     if (!FileUploadComponent.WHITELIST.includes(fileType)) {

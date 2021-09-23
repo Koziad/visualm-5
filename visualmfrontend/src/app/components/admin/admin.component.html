@@ -38,8 +38,7 @@
     <div class="admin-data">
 
       <mat-table #sortMaterial="matSort" [dataSource]="materialDataSource" matSort>
-
-        <ng-container matColumnDef="sequenceNumber">
+        <ng-container matColumnDef="sequenceNumberPublished">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Sequence Number</mat-header-cell>
           <mat-cell *matCellDef="let row">#{{row.getFormattedSequenceNumber()}} </mat-cell>
         </ng-container>
@@ -74,7 +73,7 @@
             <a mat-icon-button matTooltip="Edit label" routerLink="/materials/edit/{{ element.sequenceNumber }}">
               <img src="assets/icons/edit.svg">
             </a> |
-            <a mat-icon-button matTooltip="Delete report" (click)="onDeletePopup()">
+            <a mat-icon-button matTooltip="Delete report" (click)="onDeletePopup(element)">
               <img src="assets/icons/delete.svg">
             </a>
             <div *ngIf="deletePopup" class="popupUser">
@@ -87,7 +86,7 @@
                   <button type="button" class="btn btn-primary form-control popupUserBtn" (click)="closePopup()"><img
                     height="18" src="assets/icons/close.svg" alt="Cancel"> Cancel
                   </button>
-                  <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onDelete(element)"><img
+                  <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onDelete()"><img
                     height="18" src="assets/icons/deleteWhite.svg" alt="Delete"> Delete
                   </button>
                 </div>
@@ -206,7 +205,7 @@
           <mat-cell *matCellDef="let row"> {{row.email}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="name">
+        <ng-container matColumnDef="firstname">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
           <mat-cell *matCellDef="let row"> {{row.firstname + " " + row.lastname}}</mat-cell>
         </ng-container>
@@ -279,7 +278,7 @@
             <a mat-icon-button matTooltip="Edit user" (click)="onEditUserClick(element)">
               <img src="assets/icons/edit.svg">
             </a> |
-            <a mat-icon-button matTooltip="Delete user" (click)="onDeletePopup()">
+            <a mat-icon-button matTooltip="Delete user" (click)="onDeletePopup(element)">
               <img src="assets/icons/delete.svg">
             </a>
             <div *ngIf="deletePopup" class="popupUser">
@@ -292,7 +291,7 @@
                   <button type="button" class="btn btn-primary form-control popupUserBtn" (click)="closePopup()"><img
                     height="18" src="assets/icons/close.svg" alt="Cancel"> Cancel
                   </button>
-                  <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onDelete(element)"><img
+                  <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onDelete()"><img
                     height="18" src="assets/icons/deleteWhite.svg" alt="Delete"> Delete
                   </button>
                 </div>
@@ -309,7 +308,6 @@
       <mat-paginator #paginatorUser [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
   </mat-tab>
-
   <mat-tab>
     <ng-template mat-tab-label>
       Reports
@@ -361,7 +359,7 @@
             <a *ngIf="element.solved" mat-icon-button matTooltip="Mark as not solved" (click)="onReportEdit(element)">
               <img src="assets/icons/close_blue.svg">
             </a> |
-            <a mat-icon-button matTooltip="Delete report" (click)="onDeletePopup()">
+            <a mat-icon-button matTooltip="Delete report" (click)="onDeletePopup(element)">
               <img src="assets/icons/delete.svg">
             </a>
             <div *ngIf="deletePopup" class="popupUser">
@@ -374,7 +372,7 @@
                   <button type="button" class="btn btn-primary form-control popupUserBtn" (click)="closePopup()"><img
                     height="18" src="assets/icons/close.svg" alt="Cancel"> Cancel
                   </button>
-                  <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onDelete(element)"><img
+                  <button type="submit" class="btn btn-primary form-control popupUserBtn" (click)="onDelete()"><img
                     height="18" src="assets/icons/deleteWhite.svg" alt="Delete"> Delete
                   </button>
                 </div>
@@ -391,8 +389,6 @@
       <mat-paginator #paginatorReport [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
   </mat-tab>
-
-
   <mat-tab>
     <ng-template mat-tab-label>
       Settings
