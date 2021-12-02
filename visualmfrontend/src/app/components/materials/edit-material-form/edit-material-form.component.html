@@ -54,7 +54,7 @@
           <div class="col-md-4 text-center">
             <h1 class="h1 text-uppercase">{{ materialForm.get('title').value }}</h1>
             <input class="form-control rounded-pill" type="text" placeholder="Title" formControlName="title"
-                   maxlength="30"
+                   maxlength="20"
                    [ngClass]="{'is-invalid': !materialForm.get('title').valid && materialForm.get('title').touched,
 			              'is-valid': materialForm.get('title').valid && materialForm.get('title').touched}"/>
             <span *ngIf="materialForm.get('title').value" class="mt-1">[{{materialForm.get('title').value.length}}
