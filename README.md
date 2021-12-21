@@ -74,6 +74,11 @@ Also add the SSL certifcate and the SSL key in the `visualmfrontend/ssl` directo
   }
 ```
 
+**Running the front-end app:**
+
+You can run the app (locally) using `ng serve` from the terminal. Use `ng build --prod` to build the static files
+
+
 ## Server/Backend configuration
 ***
 ### Spring Boot
@@ -84,7 +89,10 @@ navigate to the `/visualmserver` directory in the terminal and run the `mvn inst
 
 Another dependency which is mostly external, like the Bitly API key, is the setup for e-mail service within the application.
 Make sure to create an account which will be sending the emails on behalf of the application. 
-In the next section it is described which properties are required to set this up.
+
+**Database**
+
+Create an empty MySQL database and run the app using maven to populate the database. You can use the data.sql (in visualmserver/src/main/resources/) file in to add some testdata to the database as well
 
 
 **Application.properties:**
@@ -145,6 +153,11 @@ INSERT INTO `app_config` (`key_name`, `value`) VALUES ('organisation', 'Github')
 INSERT INTO `app_config` (`key_name`, `value`) VALUES ('logo_path', 'assets/images/HvAlogo.png');
 ```
 The configuration can later be changed in the admin panel of the application in the frontend.
+
+**Running the back-end application**
+
+After setting all the properties. You can run the app locally using `mvn spring-boot:run -Dspring-boot.run.profiles=dev` from the terminal
+
 ***
 ### Members
 The application was developed by second year Software Engineering students at the University of Applied Sciences of Amsterdam.
