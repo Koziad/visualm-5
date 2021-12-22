@@ -72,13 +72,13 @@ INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`typ
 VALUES (42,'Glas','Verwarm het zand','https://bit.ly/3jR5Scx','DRAFT','ANIMAL_BASED','2020-11-16','https://bit.ly/3jR5Scx',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
-VALUES (84,'Biofoam','Preparation|Mixing and dissolving the ingredients|Cooking the ingredients, creating foam|Casting the foam','https://bit.ly/37o04DX','PUBLISHED','INORGANIC','2020-11-16','https://bit.ly/37o04DX',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
+VALUES (84,'Biofoam','Preparation|Mixing and dissolving the ingredients|Cooking the ingredients, creating foam|Casting the foam','https://bit.ly/37o04DX','PUBLISHED','FUNGAL','2020-11-16','https://bit.ly/37o04DX',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
 VALUES (85,'Gelatin Foil','Preparation|Mixing and dissolving the ingredients|Cooking the ingredients|Casting','https://bit.ly/32Q3fl3','PUBLISHED','ANIMAL_BASED','2020-11-16','https://bit.ly/32Q3fl3',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
-VALUES (86,'Kombucha Scoby ','Create a sterile environment|Prepare the sugary tea|Mix in the kombucha and seal|Let it grow|Use your SCOBY','https://bit.ly/35AOgwO','PUBLISHED','INORGANIC','2020-11-16','https://bit.ly/35AOgwO',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
+VALUES (86,'Kombucha Scoby ','Create a sterile environment|Prepare the sugary tea|Mix in the kombucha and seal|Let it grow|Use your SCOBY','https://bit.ly/35AOgwO','PUBLISHED','FUNGAL','2020-11-16','https://bit.ly/35AOgwO',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
 VALUES (87,'Mango Leather','Preparation|Mixing the ingredients and activating the starch|Casting and dehydrating in the oven|Air drying','https://bit.ly/36HQytn','PUBLISHED','PLANT_BASED','2020-11-16','https://bit.ly/36HQytn',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
@@ -102,7 +102,7 @@ INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`typ
  VALUES (233,'Flower Paper','Drying the flowers|Separating and boiling|Option A: Pounding|Option B: Blending|Moulding slurry onto the screen|Drying and pressing|Saving the boiling liquid as dye','https://bit.ly/2UvtIPZ','DRAFT','PLANT_BASED','2020-12-08','https://bit.ly/2UvtIPZ',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 INSERT INTO `material` (`sequence_number`,`name`,`steps`,`changes`,`status`,`type`,`creation_date`,`qrcode_url`,`overview_url`,`user_id`,`parent_sequence_number`, `reference`)
-VALUES (234,'Kombucha Scoby 2','Create a sterile environment|Prepare the sugary tea|Mix in the kombucha and seal|Let it grow|Use your SCOBY','https://bit.ly/35AOgwO','DRAFT','INORGANIC','2020-12-09','https://bit.ly/35AOgwO',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
+VALUES (234,'Kombucha Scoby 2','Create a sterile environment|Prepare the sugary tea|Mix in the kombucha and seal|Let it grow|Use your SCOBY','https://bit.ly/35AOgwO','DRAFT','FUNGAL','2020-12-09','https://bit.ly/35AOgwO',NULL,1,NULL, 'By John Doe - Foo bar - 2019');
 
 -- Insert MaterialTags
 INSERT INTO `material_has_tag` (`sequence_number`,`id`) VALUES (14,1);
