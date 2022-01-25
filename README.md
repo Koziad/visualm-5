@@ -1,6 +1,5 @@
-<p align="center">
-  <img width="460" src="http://149.210.144.77:8080/assets/images/LOGO.png">
-</p>
+![LOGO](https://user-images.githubusercontent.com/7750495/150908042-bb228447-3c51-4a51-ac62-b8f311af023a.png)
+
 The Material Sample Management Tool is an application to archive  alternative design materials that are renewable and compostable.
 This tool makes it easier to keep track of the new materials and view its information.
 
